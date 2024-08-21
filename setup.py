@@ -3,17 +3,19 @@ from setuptools import setup, find_packages
 setup(
  name="TidyDataCLI",
  version="0.1.0",
- packages=find_packages(),
+ packages=find_packages(include=['app', 'tests']),
  install_requires=[
      "pandas",
      "matplotlib",
      "openpyxl",
+     "argparse"
  ],
  entry_points={
      "console_scripts": [
-         "TidyDataCLI=app.cli:main",
+         'tidydata = app.cli:main',
      ],
  },
+ test_suite='tests',
  author="Philbert Siama",
  description="A CLI tool to clean Excel/CSV data files.",
  long_description=open('README.md').read(),
@@ -24,5 +26,5 @@ setup(
      "License :: OSI Approved :: MIT License",
      "Operating System :: OS Independent",
  ],
- python_requires='>=3.6',
+ python_requires='>=3.10',
 )
