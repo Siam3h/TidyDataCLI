@@ -6,13 +6,14 @@ import pandas as pd
 class TestTINYDATACLI(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        os.makedirs('tests', exist_ok=True)
         cls.input_csv = 'tests/input.csv'
         cls.cleaned_csv = 'tests/cleaned_data.csv'
         cls.output_plot = 'tests/column_name_frequency.png'
         
         df = pd.DataFrame({
             'column_name': ['a', 'b', 'a', 'c', 'b', 'a'],
-            'other_column': ['1', '2', '3', '4', '5', '6']
+            'other_column':['1', '2', '1', '4', '5', '1']
         })
         df.to_csv(cls.input_csv, index=False)
     
