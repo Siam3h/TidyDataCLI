@@ -28,7 +28,7 @@ class TestTidyDataCLI(unittest.TestCase):
     def run_cli(self, *args):
         """Helper method to run the CLI and capture output."""
         result = subprocess.run(
-            ['data-cleaner'] + list(args),
+            ['app'] + list(args),
             text=True,
             capture_output=True
         )
