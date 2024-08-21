@@ -27,8 +27,9 @@ class TestTidyDataCLI(unittest.TestCase):
     
     def run_cli(self, *args):
         """Helper method to run the CLI and capture output."""
+        command = 'tidydata'
         result = subprocess.run(
-            ['tidydatacli'] + list(args),
+            [command] + list(args),
             text=True,
             capture_output=True
         )
