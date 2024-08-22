@@ -13,7 +13,7 @@ class TestTINYDATACLI(unittest.TestCase):
         
         df = pd.DataFrame({
             'column_name': ['a', 'b', 'a', 'b', 'd', 'a'],
-            'column_name1': ['b', '2', 'a', 'b', 'c', 'a'],
+            'column_name1': ['b,.', '2?..', 'a,.,', 'b', 'c', 'a'],
             'column_name2': ['c', '3', 'a', 'b', 'd', 'a'],
             'column_name3': ['d', 'b', 'a', '4', 'a', 'a'],
             'column_name4': ['e', 'b', 'a', '5', 'c', 'a'],
@@ -41,7 +41,7 @@ class TestTINYDATACLI(unittest.TestCase):
         )
         self.assertEqual(returncode, 0)
         df = pd.read_csv('tests/cleaned_data.csv')
-        self.assertEqual(df.shape[0], 3)
+        self.assertEqual(df.shape[0], 5)
     
     def test_regex_clean(self):
         returncode, stdout, stderr = self.run_cli(
@@ -49,8 +49,8 @@ class TestTINYDATACLI(unittest.TestCase):
         )
         self.assertEqual(returncode, 0)
         df = pd.read_csv('tests/cleaned_data.csv')
-        df['other_column'] = df['other_column'].astype(str)  
-        self.assertTrue(df['other_column'].str.contains(r'\D').all())
+        df['column_name1'] = df['column_name1'].astype(str)  
+        self.assertTrue(df['column_name1'].str.contains(r'\D').all())
 
     
     def test_plot_frequency(self):
