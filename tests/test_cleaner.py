@@ -12,8 +12,11 @@ class TestTINYDATACLI(unittest.TestCase):
         cls.output_plot = 'tests/column_name_frequency.png'
         
         df = pd.DataFrame({
-            'column_name': ['a', 'b', 'a', 'c', 'b', 'a'],
-            'other_column':['1', '2', '1', '4', '5', '1']
+            'column_name': ['a', 'b', 'a', 'b', 'd', 'a'],
+            'column_name1': ['b', '2', 'a', 'b', 'c', 'a'],
+            'column_name2': ['c', '3', 'a', 'b', 'd', 'a'],
+            'column_name3': ['d', 'b', 'a', '4', 'a', 'a'],
+            'column_name4': ['e', 'b', 'a', '5', 'c', 'a'],
         })
         df.to_csv(cls.input_csv, index=False)
     
@@ -46,7 +49,9 @@ class TestTINYDATACLI(unittest.TestCase):
         )
         self.assertEqual(returncode, 0)
         df = pd.read_csv('tests/cleaned_data.csv')
+        df['other_column'] = df['other_column'].astype(str)  
         self.assertTrue(df['other_column'].str.contains(r'\D').all())
+
     
     def test_plot_frequency(self):
         returncode, stdout, stderr = self.run_cli(
