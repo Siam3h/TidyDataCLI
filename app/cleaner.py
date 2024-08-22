@@ -9,8 +9,11 @@ class DataCleaner:
         self.output_file = output_file
         self.df = pd.read_csv(input_file) if input_file.endswith('.csv') else pd.read_excel(input_file)
 
-    def remove_duplicates(self):
-        self.df = self.df.drop_duplicates()
+    def remove_duplicates(self, subset=None):
+        if subset:
+            self.df = self.df.drop_duplicates(subset=subset)
+        else:
+            self.df = self.df.drop_duplicates()
         self.df.to_csv(self.output_file, index=False)
 
     def regex_clean(self, pattern):
