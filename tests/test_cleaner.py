@@ -13,10 +13,10 @@ class TestTINYDATACLI(unittest.TestCase):
         
         df = pd.DataFrame({
             'column_name': ['a',  'b',   'a', 'b', 'd', 'a'],
-            'column_name1': ['b,.', '2?.','b', 'b', 'c', 'a'],
+            'column_name1': ['b','a','b', 'b', 'c', 'a'],
             'column_name2': ['c',  '3',  'c', 'b', 'd', 'a'],
-            'column_name3': ['d',  'b',  'd', '4', 'a', 'a'],
-            'column_name4': ['e',  'b',  'e', '5', 'c', 'a'],
+            'column_name3': ['d',  'b,.,,',  'd', '4', 'a', 'a'],
+            'column_name4': ['e',  'b',  'e', '5', 'c.,.', 'a'],
         })
         df.to_csv(cls.input_csv, index=False)
     
