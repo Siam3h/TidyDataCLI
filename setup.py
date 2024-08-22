@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
  name="TidyDataCLI",
  version="0.1.0",
- packages=find_packages(include=['app', 'tests']),
+ packages=find_packages(),
  install_requires=[
      "pandas",
      "matplotlib",
@@ -17,7 +17,8 @@ setup(
  },
  test_suite='tests',
  author="Philbert Siama",
- description="A CLI tool to clean Excel/CSV data files.",
+ author_email='siamaphilbert@outlook.com',
+ description="A CLI tool to clean Excel/CSV data files and generating graphs.",
  long_description=open('README.md').read(),
  long_description_content_type="text/markdown",
  url="https://github.com/Siam3h/TidyDataCLI.git",
