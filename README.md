@@ -118,7 +118,9 @@ docker run -v $(pwd):/data tidydatacli tidydata <command> --input-file /data/inp
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue.
+## Contributing
+
+Contributions are welcome! Please feel free to [submit a pull request](https://github.com/siam3h/tidydatacli/pulls) or [open an issue](https://github.com/siam3h/tidydatacli/issues).
 
 ## License
 
