@@ -11,6 +11,7 @@ def main():
     parser.add_argument('--output_dir', type=str, help="Directory to save plots")
 
     args = parser.parse_args()
+    
     cleaner = DataCleaner(args.input, args.output)
 
     if args.remove_duplicates:
