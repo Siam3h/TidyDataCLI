@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 from io import StringIO
 from tempfile import NamedTemporaryFile
-from cli_tool.modules.import_export import CSVHandler, ExcelHandler, JSONHandler
+from app.import_export import CSVHandler, ExcelHandler, JSONHandler
 
 class TestDataHandlers(unittest.TestCase):
     
