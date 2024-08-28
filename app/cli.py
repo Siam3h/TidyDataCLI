@@ -1,5 +1,5 @@
 import argparse
-from .cleaner import DataCleaner
+from .cleaning.cleaner import DataCleaner
 
 def main():
     parser = argparse.ArgumentParser(description="TINYDATACLI: A tool for cleaning and analyzing data.")
