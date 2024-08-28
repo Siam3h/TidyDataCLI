@@ -1,1 +1,3 @@
-from .cleaning.cleaner import DataCleaner
+from .commands import cli
+
+__all__ = ["cli"]
