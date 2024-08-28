@@ -79,4 +79,26 @@ class JSONHandler(DataHandler):
         except Exception as e:
             raise IOError(f"Failed to save JSON file: {e}")
 
+def get_handler(file_format, file_path):
+    """Return the appropriate DataHandler based on the file format."""
+    if file_format == 'csv':
+        return CSVHandler(file_path)
+    elif file_format == 'excel':
+        return ExcelHandler(file_path)
+    elif file_format == 'json':
+        return JSONHandler(file_path)
+    else:
+        raise ValueError("Unsupported file format")
 
+def import_data(source, destination, file_format):
+    """Import data from source to destination based on the file format."""
+    handler = get_handler(file_format, source)
+    data = handler.load_data()
+    
+    export_handler = get_handler(file_format, destination)
+    export_handler.save_data(data)
+
+def export_data(data, destination, file_format):
+    """Export data to the destination based on the file format."""
+    handler = get_handler(file_format, destination)
+    handler.save_data(data)
