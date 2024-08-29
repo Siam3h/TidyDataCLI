@@ -32,7 +32,6 @@ class TestDataHandlers(unittest.TestCase):
         self.temp_excel.close()
         self.temp_json.close()
         
-        import os
         os.remove(self.temp_csv.name)
         os.remove(self.temp_excel.name)
         os.remove(self.temp_json.name)
@@ -42,8 +41,7 @@ class TestDataHandlers(unittest.TestCase):
         handler = CSVHandler(self.temp_csv.name)
         loaded_data = handler.load_data()
         pd.testing.assert_frame_equal(loaded_data, self.df)
-
-        # Test saving
+        
         output_csv = NamedTemporaryFile(delete=False, suffix='.csv')
         handler.save_data(self.df, output_csv.name)
         output_csv.close()
@@ -56,8 +54,7 @@ class TestDataHandlers(unittest.TestCase):
         handler = ExcelHandler(self.temp_excel.name)
         loaded_data = handler.load_data()
         pd.testing.assert_frame_equal(loaded_data, self.df)
-
-        # Test saving
+        
         output_excel = NamedTemporaryFile(delete=False, suffix='.xlsx')
         handler.save_data(self.df, output_excel.name)
         output_excel.close()
@@ -71,7 +68,6 @@ class TestDataHandlers(unittest.TestCase):
         loaded_data = handler.load_data()
         pd.testing.assert_frame_equal(loaded_data, self.df)
 
-        # Test saving
         output_json = NamedTemporaryFile(delete=False, suffix='.json')
         handler.save_data(self.df, output_json.name)
         output_json.close()

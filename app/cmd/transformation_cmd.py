@@ -1,5 +1,7 @@
 import argparse
-from ..transformations import transform_data
+from ..transformations import DataTransformer
+
+transform_data = DataTransformer()
 
 def transformation_command(subparsers):
     parser = subparsers.add_parser('transform', help="Transform data")
