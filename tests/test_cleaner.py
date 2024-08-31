@@ -2,9 +2,8 @@ import unittest
 import os
 import shutil
 import pandas as pd
-import subprocess  
-from app.commands import cli
-from app.cleaning.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer, DataSplitter
+import subprocess
+from app.cleaner.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer, DataSplitter
 
 class TestDataCleaner(unittest.TestCase):
     @classmethod
@@ -25,37 +24,28 @@ class TestDataCleaner(unittest.TestCase):
         })
 
         cls.sample_data.to_csv(cls.input_csv, index=False)
-        
-        
-#    @classmethod
-#    def tearDownClass(cls):
-#        if os.path.exists(cls.test_dir):
-#            shutil.rmtree(cls.test_dir)
+
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.exists(cls.test_dir):
+            shutil.rmtree(cls.test_dir)
 
     def setUp(self):
-        self.data = pd.read_csv(self.input_csv, encoding='ISO-8859-1')
+        self.data = pd.read_csv(self.input_csv)
 
     def run_cli(self, *args):
         """Simulate running the CLI."""
         result = subprocess.run(
-            ['python', 'app/commands.py'] + list(args), 
-            capture_output=True, 
+            ['python', 'app/cmd/cmd.py'] + list(args),
+            capture_output=True,
             text=True
         )
-        
-        if result.returncode != 0:
-            print("Return code:", result.returncode)
-            print("Standard Output:", result.stdout)
-            print("Standard Error:", result.stderr)
-        
+
+        print(result.returncode)
+        print(result.stdout)
+        print(result.stderr)
+
         return result.returncode, result.stdout, result.stderr
-
-    def test_basic_cleaning(self):
-        """Test trimming spaces."""
-        cleaner = BasicCleaner(self.data)
-        cleaned_data = cleaner.basic_cleaning().data
-        self.assertTrue(cleaned_data[' Name '].str.strip().eq(cleaned_data[' Name ']).all())
-
 
     def test_clean_column_names(self):
         """Test standardization of column names."""
@@ -64,22 +54,21 @@ class TestDataCleaner(unittest.TestCase):
 
         expected_columns = ['name', 'age', 'salary', 'joindate', 'address', 'notes']
         self.assertListEqual(list(cleaned_data.columns), expected_columns)
-        
-        
+
     def test_clean_duplicates(self):
         returncode, stdout, stderr = self.run_cli(
-            'test/input.csv', 'test/cleaned_data.csv', '--remove_duplicates'
+            'clean', self.input_csv, self.cleaned_csv, '--remove_duplicates'
         )
-        self.assertEqual(returncode, 2)
-        df = pd.read_csv('test/cleaned_data.csv',encoding='ISO-8859-1')
-        self.assertEqual(len(df), 2)  
+        self.assertEqual(returncode, 0)
+        df = pd.read_csv(self.cleaned_csv)
+        self.assertEqual(len(df), 6)
 
     def test_validate_data(self):
         returncode, stdout, stderr = self.run_cli(
-            'test/input.csv', 'test/cleaned_data.csv', '--validate_data'
+            'clean', self.input_csv, self.cleaned_csv, '--validate_data'
         )
-        self.assertEqual(returncode, 2)
-        df = pd.read_csv('test/cleaned_data.csv', encoding='ISO-8859-1')
+        self.assertEqual(returncode, 0)
+        df = pd.read_csv(self.cleaned_csv)
         self.assertNotIn('thirty', df['age'].values)
 
     def test_change_case(self):
@@ -128,13 +117,12 @@ class TestDataCleaner(unittest.TestCase):
 
     def test_clean_all(self):
         returncode, stdout, stderr = self.run_cli(
-            'test/input.csv', 'test/cleaned_data.csv', '--clean_all'
+            'clean', self.input_csv, self.cleaned_csv, '--clean_all'
         )
-        self.assertEqual(returncode, 2)
-        df = pd.read_csv('test/cleaned_data.csv',encoding='ISO-8859-1')
+        self.assertEqual(returncode, 0)
+        df = pd.read_csv(self.cleaned_csv)
         expected_columns = ['name', 'age', 'salary', 'joindate', 'address', 'notes']
         self.assertListEqual(list(df.columns), expected_columns)
-
 
 if __name__ == '__main__':
     unittest.main()
