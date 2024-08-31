@@ -13,10 +13,7 @@ def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> st
     Returns:
         str: The generated report content as a string.
     """
-    # Load data from the input file
     data_frame = load_data(input_file)
-    
-    # Generate the report based on the data
     report_content = create_report(data_frame)
 
     if output_format == 'pdf':

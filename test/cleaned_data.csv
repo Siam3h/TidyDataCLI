@@ -1,0 +1,8 @@
+ Name ,Age,Salary,JoinDate,Address,Notes
+ Alice ,25,"$5,000 ",1/5/2021,"123, Main St, NY",Received the package
+Bob,thirty,"$6,000 ",5/2/2021,456; Elm St; CA,Address confirmed
+ charlie,35,7000$,3-Mar-21,"789 Oak St, TX",Follow-up needed
+David,40,8000,2021.04.04,101 Maple St; FL,Recieve confirmation
+Eve,45,"$9,000 ",5/5/2021,"202 Pine St, WA",All good
+Frank,50,10000$,6/6/2021,303 Birch St; OR,Pending response
+Alice,25,"$5,000 ",1/5/2021,"123, Main St, NY",No issues

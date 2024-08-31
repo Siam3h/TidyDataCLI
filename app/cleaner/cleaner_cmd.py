@@ -1,11 +1,9 @@
 import argparse
 import pandas as pd
-from app.cleaner.cleaner import DataCleaner
+from .cleaner import DataCleaner
 
 class CleaningCommand:
-	def __init__(self):
-		self.subparsers()
-			
+
     @staticmethod
     def add_cleaning_subparser(subparsers):
         parser = subparsers.add_parser('--clean', help="Clean data")

@@ -25,10 +25,10 @@ class TestDataCleaner(unittest.TestCase):
 
         cls.sample_data.to_csv(cls.input_csv, index=False)
 
-    @classmethod
-    def tearDownClass(cls):
-        if os.path.exists(cls.test_dir):
-            shutil.rmtree(cls.test_dir)
+    #@classmethod
+    #def tearDownClass(cls):
+    #    if os.path.exists(cls.test_dir):
+    #        shutil.rmtree(cls.test_dir)
 
     def setUp(self):
         self.data = pd.read_csv(self.input_csv)
@@ -36,14 +36,10 @@ class TestDataCleaner(unittest.TestCase):
     def run_cli(self, *args):
         """Simulate running the CLI."""
         result = subprocess.run(
-            ['python', 'app/cmd/cmd.py'] + list(args),
+            ['python', 'app/cmd.py'] + list(args),
             capture_output=True,
             text=True
         )
-
-        print(result.returncode)
-        print(result.stdout)
-        print(result.stderr)
 
         return result.returncode, result.stdout, result.stderr
 
@@ -69,7 +65,7 @@ class TestDataCleaner(unittest.TestCase):
         )
         self.assertEqual(returncode, 0)
         df = pd.read_csv(self.cleaned_csv)
-        self.assertNotIn('thirty', df['age'].values)
+        self.assertNotIn('thirty', df['Age'].values)
 
     def test_change_case(self):
         """Test text case transformations."""

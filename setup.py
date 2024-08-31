@@ -12,7 +12,7 @@ setup(
  ],
  entry_points={
      "console_scripts": [
-         'tidydata = app.cli:main',
+         'tidydata = app.cmd:main',
      ],
  },
  test_suite='tests',
