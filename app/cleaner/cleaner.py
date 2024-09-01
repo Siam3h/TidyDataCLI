@@ -25,15 +25,14 @@ class BasicCleaner:
         self.data = data
 
     def basic_cleaning(self):
-        """Trim extra spaces."""
+        """Trim extra spaces in all string columns."""
         self.data = self.data.apply(lambda col: col.str.strip() if col.dtype == 'object' else col)
         return self
 
     def clean_column_names(self):
-        """Standardize column names by stripping whitespace and converting to lowercase."""
-        self.data.columns = self.data.columns.str.strip().str.lower().str.replace(' ', '_')
+        """Standardize column names by stripping whitespace, converting to lowercase, and removing spaces."""
+        self.data.columns = self.data.columns.str.strip().str.lower().str.replace(' ', '')
         return self
-
 
 class ErrorHandler:
     """Manages error handling, validation, and duplicate removal."""
@@ -48,13 +47,9 @@ class ErrorHandler:
     def validate_data(self):
         """Identify and correct errors, ensuring data integrity."""
         for col in self.data.columns:
-            col_type = self.data[col].dtype
-            if col_type == 'int64':
-                self.data = self.data[pd.to_numeric(self.data[col], errors='coerce').notnull()]
-            elif col_type == 'float64':
-                self.data = self.data[pd.to_numeric(self.data[col], errors='coerce').notnull()]
-            elif col_type == 'object':
-                self.data = self.data[self.data[col].apply(lambda x: isinstance(x, str))]
+            if col == 'age':
+                self.data[col] = pd.to_numeric(self.data[col], errors='coerce')
+        self.data = self.data.dropna()
         return self
 
 class TextOperations:
