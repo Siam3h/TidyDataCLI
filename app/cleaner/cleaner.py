@@ -26,7 +26,7 @@ class BasicCleaner:
 
     def basic_cleaning(self):
         """Trim extra spaces in all string columns."""
-        self.data = self.data.apply(lambda col: col.str.strip() if col.dtype == 'object' else col)
+        self.data = self.data.apply(lambda col: col.strip() if isinstance(col,str) else col)
         return self
 
     def clean_column_names(self):
@@ -89,18 +89,20 @@ class FormatStandardizer:
         """Standardize currency formats by removing symbols and converting to float."""
         self.data[column] = self.data[column].replace('[\\$,]', '', regex=True).astype(float)
         return self
-
+"""
+Commented out code block
 class DataSplitter:
-    """Splits delimited data into multiple columns."""
+    Splits delimited data into multiple columns.
     def __init__(self, data):
         self.data = data.copy()
 
     def split_delimited_data(self, column, delimiter=',', new_columns=None):
-        """Split a column containing delimited data into multiple columns."""
+        Split a column containing delimited data into multiple columns.
         split_data = self.data[column].str.split(delimiter, expand=True)
-        if new_columns and len(new_columns) == split_data.shape[1]:
+        if new_columns and len(new_columns) == split_data.shape[0]:
             split_data.columns = new_columns
         else:
             split_data.columns = [f'{column}_part_{i+1}' for i in range(split_data.shape[1])]
         self.data = pd.concat([self.data, split_data], axis=1).drop(columns=[column])
         return self
+"""

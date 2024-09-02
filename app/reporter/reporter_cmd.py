@@ -1,15 +1,22 @@
 import argparse
-from ..reporting import generate_report
+from .reporter import generate_report
 
 def reporting_command(subparsers):
+    """
+    Adds a subcommand for generating a report.
+    """
     parser = subparsers.add_parser('report', help="Generate a report")
     parser.add_argument('input', type=str, help="Input file path")
     parser.add_argument('output', type=str, help="Output file path")
-    
+    parser.add_argument('--format', type=str, choices=['txt', 'pdf'], default='txt', help="Output format ('txt' or 'pdf')")
+
     parser.set_defaults(func=report_command)
 
 def report_command(args):
-    report = generate_report(args.input)
+    """
+    Handles the command to generate a report.
+    """
+    report = generate_report(args.input, output_format=args.format)
     with open(args.output, 'w') as f:
         f.write(report)
     print(f"Report saved to {args.output}")

@@ -2,14 +2,14 @@ import pandas as pd
 
 class DataHandler:
     """Base class for data import and export."""
-    
+
     def __init__(self, filepath):
         self.filepath = filepath
-    
+
     def load_data(self):
         """Method to load data, to be implemented by subclasses."""
         raise NotImplementedError("Subclasses should implement this method")
-    
+
     def save_data(self, data, output_filepath=None):
         """Method to save data, to be implemented by subclasses."""
         raise NotImplementedError("Subclasses should implement this method")
@@ -21,7 +21,7 @@ class DataHandler:
 
 class CSVHandler(DataHandler):
     """Handles importing and exporting CSV files."""
-    
+
     def load_data(self):
         """Load data from a CSV file."""
         try:
@@ -29,7 +29,7 @@ class CSVHandler(DataHandler):
             return data
         except Exception as e:
             raise IOError(f"Failed to load CSV file: {e}")
-    
+
     def save_data(self, data, output_filepath=None):
         """Save data to a CSV file."""
         self._validate_data(data)
@@ -41,7 +41,7 @@ class CSVHandler(DataHandler):
 
 class ExcelHandler(DataHandler):
     """Handles importing and exporting Excel files."""
-    
+
     def load_data(self, sheet_name=0):
         """Load data from an Excel file."""
         try:
@@ -49,7 +49,7 @@ class ExcelHandler(DataHandler):
             return data
         except Exception as e:
             raise IOError(f"Failed to load Excel file: {e}")
-    
+
     def save_data(self, data, output_filepath=None):
         """Save data to an Excel file."""
         self._validate_data(data)
@@ -58,10 +58,10 @@ class ExcelHandler(DataHandler):
             data.to_excel(output_filepath, index=False)
         except Exception as e:
             raise IOError(f"Failed to save Excel file: {e}")
-        
+
 class JSONHandler(DataHandler):
     """Handles importing and exporting JSON files."""
-    
+
     def load_data(self):
         """Load data from a JSON file."""
         try:
@@ -69,7 +69,7 @@ class JSONHandler(DataHandler):
             return data
         except Exception as e:
             raise IOError(f"Failed to load JSON file: {e}")
-    
+
     def save_data(self, data, output_filepath=None):
         """Save data to a JSON file."""
         self._validate_data(data)
@@ -94,7 +94,7 @@ def import_data(source, destination, file_format):
     """Import data from source to destination based on the file format."""
     handler = get_handler(file_format, source)
     data = handler.load_data()
-    
+
     export_handler = get_handler(file_format, destination)
     export_handler.save_data(data)
 

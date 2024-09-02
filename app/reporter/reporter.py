@@ -1,6 +1,8 @@
 import pandas as pd
 import io
 from typing import Optional
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> str:
     """
@@ -11,15 +13,15 @@ def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> st
         output_format (str, optional): Format of the output report ('txt' or 'pdf'). Defaults to 'txt'.
 
     Returns:
-        str: The generated report content as a string.
+        str: The generated report content as a string (if 'txt') or a message indicating PDF creation.
     """
     data_frame = load_data(input_file)
     report_content = create_report(data_frame)
 
     if output_format == 'pdf':
-        # Here, you would typically generate a PDF report
-        # This is a placeholder for PDF generation
-        raise NotImplementedError("PDF report generation is not implemented yet.")
+        pdf_file = input_file.replace('.csv', '.pdf').replace('.xlsx', '.pdf')
+        generate_pdf_report(report_content, pdf_file)
+        return f"PDF report generated: {pdf_file}"
 
     return report_content
 
@@ -67,3 +69,33 @@ def create_report(data_frame: pd.DataFrame) -> str:
         report_buffer.write(f"  - Unique Values: {data_frame[column].nunique()}\n")
 
     return report_buffer.getvalue()
+
+def generate_pdf_report(report_content: str, pdf_file: str):
+    """
+    Generates a PDF report from the given report content.
+
+    Args:
+        report_content (str): The content to be included in the PDF report.
+        pdf_file (str): The path where the PDF report will be saved.
+    """
+    # Create a PDF document
+    c = canvas.Canvas(pdf_file, pagesize=letter)
+    width, height = letter
+
+    # Set title
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(100, height - 40, "Summary Report")
+
+    # Set report content
+    c.setFont("Helvetica", 10)
+    text = c.beginText(40, height - 60)
+    text.setTextOrigin(40, height - 60)
+    text.setLeading(14)
+
+    # Add report content to PDF
+    for line in report_content.splitlines():
+        text.textLine(line)
+
+    c.drawText(text)
+    c.showPage()
+    c.save()

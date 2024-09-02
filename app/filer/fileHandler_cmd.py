@@ -1,5 +1,5 @@
 import argparse
-from ..import_export import import_data, export_data, get_handler
+from fileHandler import import_data, export_data, get_handler
 
 def import_export_command(subparsers):
     # Import command parser
