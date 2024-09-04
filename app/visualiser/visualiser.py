@@ -56,7 +56,6 @@ class DataVisualizer:
                        align='left'))
         ])
         if output_path:
-            # Save the table as an HTML file
             fig.write_html(output_path)
         else:
             fig.show()
@@ -94,15 +93,17 @@ class DataVisualizer:
             fig.show()
 
     def heat_map(self, title="Heat Map", output_path=None):
-        """Generate a heat map."""
-        plt.figure(figsize=(10, 6))
-        sns.heatmap(self.data.corr(), annot=True, cmap='coolwarm')
-        plt.title(title)
-        if output_path:
-            plt.savefig(output_path)
-            plt.close()
-        else:
-            plt.show()
+	    """Generate a heat map."""
+	    numeric_data = self.data.select_dtypes(include=['float64', 'int64'])
+	    plt.figure(figsize=(10, 6))
+	    sns.heatmap(numeric_data.corr(), annot=True, cmap='coolwarm')
+	    plt.title(title)
+	    if output_path:
+	        plt.savefig(output_path)
+	        plt.close()
+	    else:
+	        plt.show()
+
 
     def histogram(self, column, bins=10, title="Histogram", output_path=None):
         """Generate a histogram."""

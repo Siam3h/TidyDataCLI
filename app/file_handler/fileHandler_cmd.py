@@ -1,15 +1,13 @@
 import argparse
-from fileHandler import import_data, export_data, get_handler
+from .fileHandler import import_data, export_data, get_handler
 
 def import_export_command(subparsers):
-    # Import command parser
     import_parser = subparsers.add_parser('import', help="Import data")
     import_parser.add_argument('source', type=str, help="Source file path")
     import_parser.add_argument('destination', type=str, help="Destination file path")
     import_parser.add_argument('--format', type=str, choices=['csv', 'excel', 'json'], required=True, help="File format")
     import_parser.set_defaults(func=import_command)
 
-    # Export command parser
     export_parser = subparsers.add_parser('export', help="Export data")
     export_parser.add_argument('data_source', type=str, help="Data source file path")
     export_parser.add_argument('destination', type=str, help="Destination file path")

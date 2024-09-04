@@ -2,24 +2,26 @@ import pandas as pd
 
 class DataTransformer:
     """Class to handle various data transformations."""
-    
-    def __init__(self, data):
-        self.data = data
-    
-    def sort_data(self, by, ascending=True):
+
+    def sort_data(self, data: pd.DataFrame, by: list, ascending=True) -> pd.DataFrame:
         """Sort the DataFrame by specified columns."""
-        if isinstance(by, list):
-            self.data = self.data.sort_values(by=by, ascending=ascending)
-        else:
-            self.data = self.data.sort_values(by=[by], ascending=ascending)
-        return self.data
-    
-    def filter_data(self, condition):
+        if not isinstance(by, list):
+            by = [by]
+
+        if not all(col in data.columns for col in by):
+            raise ValueError("One or more columns to sort by are not present in the data.")
+
+        return data.sort_values(by=by, ascending=ascending)
+
+    def filter_data(self, data: pd.DataFrame, condition: str) -> pd.DataFrame:
         """Filter the DataFrame based on a condition."""
-        self.data = self.data.query(condition)
-        return self.data
-    
-    def apply_custom_transformation(self, func):
+        try:
+            return data.query(condition)
+        except Exception as e:
+            raise ValueError(f"Invalid query condition: {condition}. Error: {str(e)}")
+
+    def apply_custom_transformation(self, data: pd.DataFrame, func) -> pd.DataFrame:
         """Apply a custom transformation function to the DataFrame."""
-        self.data = self.data.apply(func)
-        return self.data
+        if not callable(func):
+            raise ValueError("Provided transformation function is not callable.")
+        return data.apply(func)

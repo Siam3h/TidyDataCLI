@@ -89,6 +89,11 @@ class FormatStandardizer:
         """Standardize currency formats by removing symbols and converting to float."""
         self.data[column] = self.data[column].replace('[\\$,]', '', regex=True).astype(float)
         return self
+
+class DataSplitter:
+	def __init__(self, data):
+		self.data = data
+
 """
 Commented out code block
 class DataSplitter:

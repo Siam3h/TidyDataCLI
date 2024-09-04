@@ -16,7 +16,11 @@ def report_command(args):
     """
     Handles the command to generate a report.
     """
-    report = generate_report(args.input, output_format=args.format)
-    with open(args.output, 'w') as f:
-        f.write(report)
-    print(f"Report saved to {args.output}")
+    try:
+        report = generate_report(args.input, output_format=args.format)
+        with open(args.output, 'w' if args.format == 'txt' else 'wb') as f:
+            if args.format == 'txt':
+                f.write(report)
+            print(f"Report saved to {args.output}")
+    except Exception as e:
+        print(f"Error generating report: {e}")

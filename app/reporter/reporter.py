@@ -3,6 +3,7 @@ import io
 from typing import Optional
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+import os
 
 def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> str:
     """
@@ -15,6 +16,9 @@ def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> st
     Returns:
         str: The generated report content as a string (if 'txt') or a message indicating PDF creation.
     """
+    if not os.path.exists(input_file):
+        raise FileNotFoundError(f"Input file {input_file} not found.")
+
     data_frame = load_data(input_file)
     report_content = create_report(data_frame)
 
@@ -52,10 +56,8 @@ def create_report(data_frame: pd.DataFrame) -> str:
     Returns:
         str: Report content.
     """
-    # Generate a simple summary report
     report_buffer = io.StringIO()
 
-    # Summary statistics
     report_buffer.write("Summary Report\n")
     report_buffer.write("====================\n")
     report_buffer.write(f"Number of Rows: {len(data_frame)}\n")
@@ -68,6 +70,12 @@ def create_report(data_frame: pd.DataFrame) -> str:
         report_buffer.write(f"  - Missing Values: {data_frame[column].isnull().sum()}\n")
         report_buffer.write(f"  - Unique Values: {data_frame[column].nunique()}\n")
 
+        if pd.api.types.is_numeric_dtype(data_frame[column]):
+            report_buffer.write(f"  - Mean: {data_frame[column].mean()}\n")
+            report_buffer.write(f"  - Median: {data_frame[column].median()}\n")
+            report_buffer.write(f"  - Min: {data_frame[column].min()}\n")
+            report_buffer.write(f"  - Max: {data_frame[column].max()}\n")
+
     return report_buffer.getvalue()
 
 def generate_pdf_report(report_content: str, pdf_file: str):
@@ -78,22 +86,23 @@ def generate_pdf_report(report_content: str, pdf_file: str):
         report_content (str): The content to be included in the PDF report.
         pdf_file (str): The path where the PDF report will be saved.
     """
-    # Create a PDF document
     c = canvas.Canvas(pdf_file, pagesize=letter)
     width, height = letter
 
-    # Set title
     c.setFont("Helvetica-Bold", 16)
     c.drawString(100, height - 40, "Summary Report")
 
-    # Set report content
     c.setFont("Helvetica", 10)
     text = c.beginText(40, height - 60)
     text.setTextOrigin(40, height - 60)
     text.setLeading(14)
 
-    # Add report content to PDF
     for line in report_content.splitlines():
+        if text.getY() < 50:  
+            c.drawText(text)
+            c.showPage()
+            text = c.beginText(40, height - 60)
+            text.setLeading(14)
         text.textLine(line)
 
     c.drawText(text)

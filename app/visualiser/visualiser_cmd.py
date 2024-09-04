@@ -28,7 +28,6 @@ class VisualiserCommand:
 
     @staticmethod
     def visualiser_command(args):
-        # Load the data from the CSV file
         try:
             data_frame = pd.read_csv(args.input)
         except Exception as e:
@@ -41,7 +40,6 @@ class VisualiserCommand:
         output_path = args.output
 
         try:
-            # Map the visualization type to the DataVisualizer method and arguments
             if visualization_type == 'bar':
                 if not args.x or not args.y:
                     raise ValueError("Bar chart requires --x and --y arguments")
