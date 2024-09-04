@@ -21,7 +21,7 @@ matplotlib==3.9.2
 mdurl==0.1.2
 more-itertools==10.4.0
 nh3==0.2.18
-numpy==2.1.0
+numpy==2.0.2
 openpyxl==3.1.5
 packaging==24.1
 pandas==2.2.2
