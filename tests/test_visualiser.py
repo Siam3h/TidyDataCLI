@@ -1,7 +1,7 @@
 import unittest
 import os
 import pandas as pd
-from data_visualizer import DataVisualizer
+from app.visualiser.visualiser import DataVisualizer
 
 class TestDataVisualizer(unittest.TestCase):
 

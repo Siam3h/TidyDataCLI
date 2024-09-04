@@ -3,7 +3,7 @@ import os
 import shutil
 import pandas as pd
 import subprocess
-from app.cleaner.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer, DataSplitter
+from app.cleaner.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer
 
 class TestDataCleaner(unittest.TestCase):
     @classmethod

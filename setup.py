@@ -18,7 +18,7 @@ setup(
  test_suite='tests',
  author="Philbert Siama",
  author_email='siamaphilbert@outlook.com',
- description="A CLI tool to clean Excel/CSV data files and generating graphs.",
+ description="A CLI tool to automate cleaning, transformation and visualisation of Excel/CSV data.",
  long_description=open('README.md').read(),
  long_description_content_type="text/markdown",
  url="https://github.com/Siam3h/TidyDataCLI.git",
