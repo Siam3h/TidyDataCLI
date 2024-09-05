@@ -1,4 +1,4 @@
-![TidyDataCLI Logo](https://github.com/Siam3h/TidyDataCLI/blob/main/TidyDataCLI.jpg)
+![TidyDataCLI Logo](https://raw.githubusercontent.com/Siam3h/TidyDataCLI/main/TidyDataCLI.jpg)
 
 # TidyDataCLI
 
@@ -52,6 +52,7 @@ With its wide range of features, TidyDataCLI simplifies complex data tasks, offe
 	- Tree Maps: Visualize hierarchical data using tree maps.
 
 ### Report Generation
+  - Create detailed PDF or text reports directly from your data files.
 
 ### Cross-Platform
 	  - Runs on Linux, macOS, and Windows and Docker Environments
