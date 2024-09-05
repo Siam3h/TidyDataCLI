@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 # **TidyDataCLI**
+=======
+![TidyDataCLI Logo](https://github.com/siam3h/TidyDataCLI/blob/main/app/utils/A minimalist logo for TidyDataCLI.jpg)
+
+# TidyDataCLI
+>>>>>>> 003d92dbb6c221cc52a5c07fa20d70bd1701363f
 
 ## **Overview**
 
