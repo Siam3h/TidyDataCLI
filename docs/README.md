@@ -1,6 +1,4 @@
-![TidyDataCLI Logo](https://raw.githubusercontent.com/Siam3h/TidyDataCLI/main/TidyDataCLI.jpg)
-
-# TidyDataCLI
+(https://raw.githubusercontent.com/Siam3h/TidyDataCLI/main/TidyDataCLI.jpg)
 
 ## **Overview**
 
