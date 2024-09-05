@@ -33,8 +33,9 @@ TidyDataCLI is a versatile command-line tool designed to automate the process of
 - **Histograms:** Plot histograms with adjustable bin sizes.
 - **Tree Maps:** Visualize hierarchical data using tree maps.
 
-- **Report Generation**:
-  - Generate textual or PDF reports from Excel/CSV data
+### Report Generation
+	- Generate textual or PDF reports from Excel/CSV data
+
 - **Cross-Platform**: Runs on Linux, macOS, and Windows
 - **Docker Support**: Avoid dependency issues by running the CLI in a Docker container
 
