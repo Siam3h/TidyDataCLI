@@ -1,4 +1,4 @@
-![TidyDataCLI Logo](app/utils/A minimalist logo for TidyDataCLI.jpg)
+![TidyDataCLI Logo](https://github.com/siam3h/TidyDataCLI/blob/main/app/utils/A minimalist logo for TidyDataCLI.jpg)
 
 # TidyDataCLI
 
