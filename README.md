@@ -7,32 +7,35 @@ TidyDataCLI is a versatile command-line tool designed to automate the process of
 ## Features
 
 ### Data Cleaning
-- **Remove Duplicates:** Efficiently remove duplicate entries from your dataset.
-- **Regex Cleaning:** Sanitize data using customizable regular expressions.
-- **Column Name Cleaning:** Standardize column names by stripping spaces and converting to lowercase.
-- **Trim Spaces:** Remove leading and trailing spaces from string columns.
-- **Age Validation:** Validate and clean 'age' columns to ensure data integrity.
-- **Change Case:** Convert text columns to lowercase, uppercase, title case, or capitalize.
-- **Date Standardization:** Standardize date formats across specified columns.
-
+```bash
+	- **Remove Duplicates:** Efficiently remove duplicate entries from your dataset.
+	- **Regex Cleaning:** Sanitize data using customizable regular expressions.
+	- **Column Name Cleaning:** Standardize column names by stripping spaces and converting to lowercase.
+	- **Trim Spaces:** Remove leading and trailing spaces from string columns.
+	- **Age Validation:** Validate and clean 'age' columns to ensure data integrity.
+	- **Change Case:** Convert text columns to lowercase, uppercase, title case, or capitalize.
+	- **Date Standardization:** Standardize date formats across specified columns.
+```
 ### Data Transformation
-- **Sorting:** Sort data by one or more columns with ascending or descending options.
-- **Filtering:** Apply conditions to filter rows based on specified criteria.
-- **Custom Transformations:** Apply user-defined lambda functions for complex transformations.
-- **Column Addition:** Add values to existing columns and perform arithmetic operations.
-- **Aggregation:** Aggregate data by summing, averaging, or counting grouped values.
-
+```bash
+	- **Sorting:** Sort data by one or more columns with ascending or descending options.
+	- **Filtering:** Apply conditions to filter rows based on specified criteria.
+	- **Custom Transformations:** Apply user-defined lambda functions for complex transformations.
+	- **Column Addition:** Add values to existing columns and perform arithmetic operations.
+	- **Aggregation:** Aggregate data by summing, averaging, or counting grouped values.
+```
 ### Visualization
-- **Bar Charts:** Generate bar charts with customizable x and y axes.
-- **Pie Charts:** Create pie charts with labels and values for visualization.
-- **Word Clouds:** Visualize text data using word clouds.
-- **Line Charts:** Plot line charts for trend analysis.
-- **Box-and-Whisker Plots:** Create box plots to analyze data distributions.
-- **Gantt Charts:** Visualize project timelines with Gantt charts.
-- **Heat Maps:** Generate heat maps to represent data density.
-- **Histograms:** Plot histograms with adjustable bin sizes.
-- **Tree Maps:** Visualize hierarchical data using tree maps.
-
+```bash
+	- **Bar Charts:** Generate bar charts with customizable x and y axes.
+	- **Pie Charts:** Create pie charts with labels and values for visualization.
+	- **Word Clouds:** Visualize text data using word clouds.
+	- **Line Charts:** Plot line charts for trend analysis.
+	- **Box-and-Whisker Plots:** Create box plots to analyze data distributions.
+	- **Gantt Charts:** Visualize project timelines with Gantt charts.
+	- **Heat Maps:** Generate heat maps to represent data density.
+	- **Histograms:** Plot histograms with adjustable bin sizes.
+	- **Tree Maps:** Visualize hierarchical data using tree maps.
+```
 ### Report Generation
 	- Generate textual or PDF reports from Excel/CSV data
 
