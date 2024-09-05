@@ -5,6 +5,7 @@
 ## **Overview**
 
 [![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli)![PyPI version](https://img.shields.io/pypi/v/tidydatacli)
 [![GitHub forks](https://img.shields.io/github/forks/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/issues)
 [![GitHub license](https://img.shields.io/github/license/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/blob/main/LICENSE)

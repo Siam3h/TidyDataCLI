@@ -2,15 +2,27 @@
 
 # TidyDataCLI
 
-## Overview
+## **Overview**
+
 [![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli)![PyPI version](https://img.shields.io/pypi/v/tidydatacli)
 [![GitHub forks](https://img.shields.io/github/forks/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/issues)
 [![GitHub license](https://img.shields.io/github/license/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/blob/main/LICENSE)
 
-TidyDataCLI is a versatile command-line tool designed to automate the process of cleaning, transforming, and visualizing Excel/CSV data. The tool is cross-platform and can be run on any operating system, including via Docker, without requiring a Python installation.
+TidyDataCLI is a robust command-line tool built for automating the process of cleaning, transforming, and visualizing Excel/CSV data. Designed to be cross-platform, it can run seamlessly on Linux, macOS, and Windows, and can even be used through Docker without requiring Python to be installed.
 
-## Features
+**Why use TidyDataCLI?**  
+With its wide range of features, TidyDataCLI simplifies complex data tasks, offering tools for:
+
+- **Data Cleaning**: Remove duplicates, standardize column names, trim spaces, validate ages, and much more.
+- **Data Transformation**: Sort, filter, apply custom transformations, and aggregate data effortlessly.
+- **Visualization**: Generate professional-grade charts like bar charts, word clouds, heat maps, and Gantt charts.
+- **Report Generation**: Create detailed PDF or text reports directly from your data files.
+
+---
+
+## **Features**
 
 ### Data Cleaning
 	- Remove Duplicates: Efficiently remove duplicate entries from your dataset.
@@ -40,16 +52,13 @@ TidyDataCLI is a versatile command-line tool designed to automate the process of
 	- Tree Maps: Visualize hierarchical data using tree maps.
 
 ### Report Generation
-	- Generate textual or PDF reports from Excel/CSV data
 
 ### Cross-Platform
-  - Runs on Linux, macOS, and Windows
+	  - Runs on Linux, macOS, and Windows and Docker Environments
 
-### Docker Support
-  - Avoid dependency issues by running the CLI in a Docker container
+---
 
-## Table of Contents
-
+## **Table of Contents**
 - [Installation](#installation)
 - [Usage](#usage)
 - [Commands Overview](#commands-overview)
@@ -62,202 +71,126 @@ TidyDataCLI is a versatile command-line tool designed to automate the process of
 - [Contributing](#contributing)
 - [License](#license)
 
-## Installation
+---
 
-### Requirements
+## **Installation**
 
-- Python 3.7 or higher
-- Pip (Python package installer)
-- Docker (optional)
+### **Requirements**
+- Python 3.7+
+- Pip (Python package manager)
+- Docker (Optional, for containerized execution)
 
-### Install via `pip`
-
-Install the latest version of TidyDataCLI using pip:
-
+### **Install via pip**
 ```bash
 pip install TidyDataCLI
 ```
 
-### Install from Source
-
-To install TidyDataCLI from the source:
-
-1. Clone the GitHub repository:
+### **Install from Source**
+1. Clone the repository:
    ```bash
    git clone https://github.com/Siam3h/tidydatacli.git
    ```
-2. Navigate to the project directory:
+2. Navigate to the directory:
    ```bash
    cd tidydatacli
    ```
-3. Install the package locally:
+3. Install the package:
    ```bash
    pip install .
    ```
 
-### Running via Docker
-
-If you prefer not to install Python dependencies, you can run TidyDataCLI inside a Docker container.
-
+### **Running with Docker**
+For a containerized approach:
 1. Pull the Docker image:
    ```bash
    docker pull tidydatacli
    ```
-2. Run the CLI commands from the container:
+2. Run TidyDataCLI via Docker:
    ```bash
    docker run -v $(pwd):/data tidydatacli tidydata <command> --input /data/input.csv --output /data/output.csv
    ```
 
-## Usage
+---
 
-Once installed, you can execute the `tidydata` command from the terminal.
+## **Usage**
 
-### Basic Syntax
+Once installed, TidyDataCLI can be invoked using the following syntax:
 
 ```bash
 tidydata <command> [options]
 ```
 
-## Commands Overview
+### **Example Commands**
 
-### 1. `clean`
-
-The `clean` command is used to clean and sanitize data files, handling duplicates, column name cleaning, and trimming spaces.
-
+#### Cleaning Data:
 ```bash
-tidydata clean --input <input_file> --output <output_file> [options]
+tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns
 ```
 
-#### Options:
-- `--remove_duplicates`: Removes duplicate rows.
-- `--clean_columns`: Standardizes column names (lowercase, no spaces).
-- `--trim_spaces`: Trims leading/trailing spaces.
-- `--regex_clean <pattern>`: Cleans data using a regular expression.
-
-### 2. `transform`
-
-The `transform` command applies sorting, filtering, and transformations to the dataset.
-
+#### Transforming Data:
 ```bash
-tidydata transform --input <input_file> --output <output_file> [options]
+tidydata transform --input data.csv --output transformed.csv --sort column1 --filter "age > 30"
 ```
 
-#### Options:
-- `--sort <column>`: Sort data based on a specific column.
-- `--filter <condition>`: Filter rows based on a condition (e.g., "age > 30").
-- `--add <column> <value>`: Add or modify column values.
-- `--transform <lambda_function>`: Apply custom transformations.
-
-### 3. `visualize`
-
-The `visualize` command generates charts and visual representations of data.
-
+#### Visualizing Data:
 ```bash
-tidydata visualize --input <input_file> --type <chart_type> --x <x_column> --y <y_column> --output <output_image>
+tidydata visualize --input data.csv --type bar --x category --y sales --output bar_chart.png
 ```
 
-#### Options:
-- `--type <chart_type>`: Specify the chart type (e.g., `bar`, `pie`, `histogram`, `wordcloud`).
-- `--x <column>`: The column to use for the x-axis (for bar/histogram).
-- `--y <column>`: The column to use for the y-axis (for bar charts).
-
-Example:
-```bash
-tidydata visualize --input data.csv --type bar --x category --y sales --output ./charts/bar_chart.png
-```
-
-### 4. `report`
-
-The `report` command generates textual or PDF reports based on data from Excel/CSV files.
-
-```bash
-tidydata report --input <input_file> --output <report_file> --format <pdf|text>
-```
-
-#### Options:
-- `--format`: Specify report format (`pdf` or `text`).
-- `--summary`: Generate a summary report.
-- `--detailed`: Generate a detailed report with statistics.
-
-Example:
+#### Generating Reports:
 ```bash
 tidydata report --input data.csv --output report.pdf --format pdf --summary
 ```
 
-## Cleaning Data
+---
 
-Cleaning your data involves sanitizing it for better analysis. You can clean the data using various options like removing duplicates, trimming spaces, and more.
+## **Commands Overview**
 
-```bash
-tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns --trim_spaces
-```
+### 1. `clean`
+Clean your dataset by removing duplicates, trimming spaces, or performing regex-based cleaning.
 
-## Transforming Data
+### 2. `transform`
+Apply transformations such as sorting, filtering, adding columns, and custom lambda functions.
 
-You can transform data by sorting, filtering, adding new columns, or applying custom transformations using lambda functions.
+### 3. `visualize`
+Create visual representations of your data, such as bar charts, pie charts, and word clouds.
 
-```bash
-tidydata transform --input data.csv --output transformed_data.csv --sort column1 --filter "age > 30" --add new_column 5
-```
+### 4. `report`
+Generate reports in **text** or **PDF** format with customizable summaries or detailed outputs.
 
-## Visualizing Data
+---
 
-TidyDataCLI supports different types of charts for visualizing data. Common visualizations include bar charts, pie charts, histograms, and word clouds.
+## **Running with Docker**
 
-### Generate a Bar Chart
-
-```bash
-tidydata visualize --input data.csv --type bar --x category --y sales --output ./charts/bar_chart.png
-```
-
-### Create a Word Cloud
-
-```bash
-tidydata visualize --input data.csv --type wordcloud --column text_column --output ./charts/wordcloud.png
-```
-
-## Report Generation
-
-TidyDataCLI allows generating reports in text or PDF formats to summarize or detail insights from your data.
-
-```bash
-tidydata report --input data.csv --output summary_report.pdf --format pdf --summary
-```
-
-## Running with Docker
-
-You can run TidyDataCLI using Docker to avoid dependency management issues. Ensure Docker is installed on your system before running the commands.
-
+To avoid dependency management, you can use Docker:
 ```bash
 docker run -v $(pwd):/data tidydatacli tidydata clean --input /data/input.csv --output /data/output.csv
 ```
 
-## Error Handling
+---
 
-TidyDataCLI has built-in error handling for common issues like file not found, invalid column names, and missing required options.
+## **Error Handling**
 
-For example, if you try to clean a file that doesn’t exist, you will receive an error message:
+Error messages are displayed for common issues like file not found, invalid columns, or missing options.
+
+Example error:
 ```bash
 Error: Input file 'non_existent_file.csv' not found.
 ```
 
-Ensure that:
-- The input file path is correct
-- The column names provided match those in the dataset
-- Necessary options for the command are included
+---
 
-## Contributing
+## **Contributing**
 
-We welcome contributions to TidyDataCLI! If you want to contribute, please follow these steps:
-
+We welcome contributions!  
 1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and write tests, if applicable.
-4. Submit a pull request for review.
+2. Create a new branch.
+3. Make your changes and submit a pull request.
 
-For any issues or suggestions, feel free to open an [issue](https://github.com/Siam3h/tidydatacli/issues) on the GitHub repository.
+Find issues or suggestions? Please open an [issue](https://github.com/Siam3h/tidydatacli/issues) on GitHub.
 
-## License
+---
 
-TidyDataCLI is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
-```
+## **License**
+
+TidyDataCLI is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
