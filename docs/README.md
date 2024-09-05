@@ -5,7 +5,7 @@
 ## **Overview**
 
 [![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
-[![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli)![PyPI version](https://img.shields.io/pypi/v/tidydatacli)
+[![PyPI version](https://img.shields.io/pypi/v/tidydatacli)](https://pypi.org/project/tidydatacli/)
 [![GitHub forks](https://img.shields.io/github/forks/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/issues)
 [![GitHub license](https://img.shields.io/github/license/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/blob/main/LICENSE)
@@ -142,7 +142,6 @@ tidydata visualize --input data.csv --type bar --x category --y sales --output b
 tidydata report --input data.csv --output report.pdf --format pdf --summary
 ```
 
----
 
 ## **Commands Overview**
 
@@ -158,7 +157,6 @@ Create visual representations of your data, such as bar charts, pie charts, and 
 ### 4. `report`
 Generate reports in **text** or **PDF** format with customizable summaries or detailed outputs.
 
----
 
 ## **Running with Docker**
 
@@ -167,7 +165,6 @@ To avoid dependency management, you can use Docker:
 docker run -v $(pwd):/data tidydatacli tidydata clean --input /data/input.csv --output /data/output.csv
 ```
 
----
 
 ## **Error Handling**
 
@@ -178,7 +175,6 @@ Example error:
 Error: Input file 'non_existent_file.csv' not found.
 ```
 
----
 
 ## **Contributing**
 
@@ -189,8 +185,11 @@ We welcome contributions!
 
 Find issues or suggestions? Please open an [issue](https://github.com/Siam3h/tidydatacli/issues) on GitHub.
 
----
 
 ## **License**
 
 TidyDataCLI is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+
+## **Contact**
+
+For any questions or issues, please contact Siama at [siamaphilbert@outlook.com](mailto:siamaphilbert@outlook.com).
