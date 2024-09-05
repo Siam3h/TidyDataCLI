@@ -1,6 +1,6 @@
 # TidyDataCLI
 
-##Overview
+## Overview
 
 TidyDataCLI is a versatile command-line tool designed to automate the process of cleaning, transforming, and visualizing Excel/CSV data. The tool is cross-platform and can be run on any operating system, including via Docker, without requiring a Python installation.
 
