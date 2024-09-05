@@ -38,7 +38,7 @@ TidyDataCLI is a versatile command-line tool designed to automate the process of
 
 ### Cross-Platform
   - Runs on Linux, macOS, and Windows
-	
+
 ### Docker Support
   - Avoid dependency issues by running the CLI in a Docker container
 
@@ -253,5 +253,5 @@ For any issues or suggestions, feel free to open an [issue](https://github.com/S
 
 ## License
 
-TidyDataCLI is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+TidyDataCLI is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
 ```
