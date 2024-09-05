@@ -1,6 +1,12 @@
+![TidyDataCLI Logo](https://github.com/Siam3h/TidyDataCLI/blob/main/TidyDataCLI.jpg)
+
 # TidyDataCLI
 
 ## Overview
+[![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/issues)
+[![GitHub license](https://img.shields.io/github/license/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/blob/main/LICENSE)
 
 TidyDataCLI is a versatile command-line tool designed to automate the process of cleaning, transforming, and visualizing Excel/CSV data. The tool is cross-platform and can be run on any operating system, including via Docker, without requiring a Python installation.
 
