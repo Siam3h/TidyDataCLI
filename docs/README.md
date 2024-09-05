@@ -1,4 +1,4 @@
-![TidyDataCLI Logo](path_to_logo)
+![TidyDataCLI Logo](app/utils/A minimalist logo for TidyDataCLI.jpg)
 
 # TidyDataCLI
 
