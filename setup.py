@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
  name="TidyDataCLI",
- version="1.1.0",
+ version="0.2.0",
  packages=find_packages(),
  install_requires=[
      "pandas",
@@ -19,7 +19,7 @@ setup(
  author="Philbert Siama",
  author_email='siamaphilbert@outlook.com',
  description="A CLI tool to automate cleaning, transformation and visualisation of Excel/CSV data.",
- long_description=open('docs/README.md').read(),
+ long_description=open('README.md').read(),
  long_description_content_type="text/markdown",
  url="https://github.com/Siam3h/TidyDataCLI.git",
  classifiers=[
