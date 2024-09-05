@@ -1,3 +1,5 @@
+![TidyDataCLI Logo](path_to_logo)
+
 # TidyDataCLI
 
 ## Overview
