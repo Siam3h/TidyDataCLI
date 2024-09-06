@@ -1,7 +1,7 @@
 import unittest
 import os
 import pandas as pd
-from app.reporter.reporter import generate_report, load_data, create_report, generate_pdf_report
+from src.reporter.reporter import generate_report, load_data, create_report, generate_pdf_report
 
 class TestReporter(unittest.TestCase):
 

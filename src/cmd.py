@@ -1,9 +1,9 @@
 import argparse
-from cleaner.cleaner_cmd import CleaningCommand
-from file_handler.fileHandler_cmd import import_export_command
-from transformer.transformer_cmd import transformation_command
-from reporter.reporter_cmd import reporting_command
-from visualiser.visualiser_cmd import VisualiserCommand
+from .cleaner.cleaner_cmd import CleaningCommand
+from .file_handler.fileHandler_cmd import import_export_command
+from .transformer.transformer_cmd import transformation_command
+from .reporter.reporter_cmd import reporting_command
+from .visualiser.visualiser_cmd import VisualiserCommand
 
 def cli():
     parser = argparse.ArgumentParser(description="A CLI tool to automate cleaning, transformation and visualisation of Excel/CSV data.")

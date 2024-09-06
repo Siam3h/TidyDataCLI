@@ -3,7 +3,7 @@ import os
 import shutil
 import pandas as pd
 import subprocess
-from app.cleaner.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer
+from src.cleaner.cleaner import DataCleaner, BasicCleaner, ErrorHandler, TextOperations, FormatStandardizer
 
 class TestDataCleaner(unittest.TestCase):
     @classmethod
@@ -36,7 +36,7 @@ class TestDataCleaner(unittest.TestCase):
     def run_cli(self, *args):
         """Simulate running the CLI."""
         result = subprocess.run(
-            ['python', 'app/cmd.py'] + list(args),
+            ['python', 'src/cmd.py'] + list(args),
             capture_output=True,
             text=True
         )
