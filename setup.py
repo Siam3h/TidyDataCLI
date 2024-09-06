@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
  name="TidyDataCLI",
- version="0.2.6",
+ version="0.2.8",
  packages=find_packages(),
  install_requires=[
         "pandas==2.2.2",
@@ -60,7 +60,7 @@ setup(
     ],
  entry_points={
      "console_scripts": [
-         'tidydata = src.cmd:main',
+         'tidydata = src.cmd:cli',
      ],
  },
  test_suite='tests',
