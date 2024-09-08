@@ -1,7 +1,5 @@
 ![TidyDataCLI Logo](https://raw.githubusercontent.com/Siam3h/TidyDataCLI/main/TidyDataCLI.jpg)
 
-# TidyDataCLI
-
 ## **Overview**
 
 [![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
@@ -52,7 +50,6 @@ With its wide range of features, TidyDataCLI simplifies complex data tasks, offe
 	- Tree Maps: Visualize hierarchical data using tree maps.
 
 ### Report Generation
-  - Create detailed PDF or text reports directly from your data files.
 
 ### Cross-Platform
 	  - Runs on Linux, macOS, and Windows and Docker Environments
@@ -135,12 +132,12 @@ tidydata transform --input data.csv --output transformed.csv --sort column1 --fi
 
 #### Visualizing Data:
 ```bash
-tidydata visualize --input data.csv --type bar --x category --y sales --output bar_chart.png
+tidydata visualize accounts.csv --type bar --x 'BILL TO' --y 'INVOICE NUMBER' --output bill_invoice_number.png
 ```
 
 #### Generating Reports:
 ```bash
-tidydata report --input data.csv --output report.pdf --format pdf --summary
+tidydata report accounts.xlsx report.pdf --format pdf
 ```
 
 

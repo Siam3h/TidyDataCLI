@@ -134,12 +134,12 @@ tidydata transform --input data.csv --output transformed.csv --sort column1 --fi
 
 #### Visualizing Data:
 ```bash
-tidydata visualize --input data.csv --type bar --x category --y sales --output bar_chart.png
+tidydata visualize accounts.csv --type bar --x 'BILL TO' --y 'INVOICE NUMBER' --output bill_invoice_number.png
 ```
 
 #### Generating Reports:
 ```bash
-tidydata report --input data.csv --output report.pdf --format pdf --summary
+tidydata report accounts.xlsx report.pdf --format pdf
 ```
 
 
