@@ -27,8 +27,6 @@ class CSVHandler(DataHandler):
         """Load data from a CSV file."""
         try:
             data = pd.read_csv(self.filepath)
-            data.replace({',': '.'}, regex=True, inplace=True)
-            data = data.apply(pd.to_numeric)
             return data
         except Exception as e:
             raise IOError(f"Failed to load CSV file: {e}")
