@@ -1,9 +1,12 @@
-import pandas as pd
 import io
-from typing import Optional
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
 import os
+from typing import Optional
+import pandas as pd
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from file_utils import read_file
+from exceptions import FileNotFoundError, UnsupportedFileFormatError
 
 def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> str:
     """
@@ -17,36 +20,28 @@ def generate_report(input_file: str, output_format: Optional[str] = 'txt') -> st
         str: The generated report content as a string (if 'txt') or a message indicating PDF creation.
     """
     if not os.path.exists(input_file):
-        raise FileNotFoundError(f"Input file {input_file} not found.")
+        raise FileNotFoundError(input_file)
 
-    data_frame = load_data(input_file)
+    try:
+        data_frame = read_file(input_file)
+    except ValueError as e:
+        raise UnsupportedFileFormatError(file_format=input_file.split('.')[-1]) from e
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
     report_content = create_report(data_frame)
 
     if output_format == 'pdf':
-        pdf_file = input_file.replace('.csv', '.pdf').replace('.xlsx', '.pdf')
-        generate_pdf_report(report_content, pdf_file)
+        pdf_file = input_file.rsplit('.', 1)[0] + '.pdf'
+        try:
+            generate_pdf_report(report_content, pdf_file)
+        except Exception as e:
+            return f"Failed to generate PDF: {e}"
         return f"PDF report generated: {pdf_file}"
 
     return report_content
 
-def load_data(file_path: str) -> pd.DataFrame:
-    """
-    Loads data from a CSV or Excel file into a DataFrame.
-
-    Args:
-        file_path (str): Path to the data file.
-
-    Returns:
-        pd.DataFrame: Data loaded into a DataFrame.
-    """
-    if file_path.endswith('.csv'):
-        return pd.read_csv(file_path)
-    elif file_path.endswith('.xlsx'):
-        return pd.read_excel(file_path)
-    else:
-        raise ValueError("Unsupported file format. Please provide a CSV or Excel file.")
-
-def create_report(data_frame: pd.DataFrame) -> str:
+def create_report(data_frame) -> str:
     """
     Creates a textual report from the DataFrame.
 
@@ -86,25 +81,15 @@ def generate_pdf_report(report_content: str, pdf_file: str):
         report_content (str): The content to be included in the PDF report.
         pdf_file (str): The path where the PDF report will be saved.
     """
-    c = canvas.Canvas(pdf_file, pagesize=letter)
-    width, height = letter
+    try:
+        doc = SimpleDocTemplate(pdf_file, pagesize=letter)
+        styles = getSampleStyleSheet()
+        content = []
 
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(100, height - 40, "Summary Report")
+        content.append(Paragraph("Summary Report", styles['Title']))
+        content.append(Spacer(1, 12))
+        content.append(Paragraph(report_content, styles['BodyText']))
 
-    c.setFont("Helvetica", 10)
-    text = c.beginText(40, height - 60)
-    text.setTextOrigin(40, height - 60)
-    text.setLeading(14)
-
-    for line in report_content.splitlines():
-        if text.getY() < 50:  
-            c.drawText(text)
-            c.showPage()
-            text = c.beginText(40, height - 60)
-            text.setLeading(14)
-        text.textLine(line)
-
-    c.drawText(text)
-    c.showPage()
-    c.save()
+        doc.build(content)
+    except Exception as e:
+        raise RuntimeError(f"Failed to generate PDF report: {e}")

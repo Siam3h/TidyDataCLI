@@ -90,6 +90,19 @@ def get_handler(file_format, file_path):
     else:
         raise ValueError("Unsupported file format")
 
+def determine_file_format(file_path):
+    """Determine the file format based on the file extension."""
+    _, ext = os.path.splitext(file_path)
+    ext = ext.lower()
+    if ext in ['.csv']:
+        return 'csv'
+    elif ext in ['.xlsx', '.xls']:
+        return 'excel'
+    elif ext in ['.json']:
+        return 'json'
+    else:
+        raise ValueError("Unsupported file type. Please provide a CSV, Excel, or JSON file.")
+
 def import_data(source, destination, file_format):
     """Import data from source to destination based on the file format."""
     handler = get_handler(file_format, source)

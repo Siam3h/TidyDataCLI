@@ -5,7 +5,7 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import plotly.graph_objects as go
 from wordcloud import WordCloud
-from src.utils.exceptions import ColumnNotFoundError, DataMismatchError, UnsupportedFormatError, render_error_message
+from src.utils.exceptions_utils import ColumnNotFoundError, DataMismatchError, UnsupportedFormatError, render_error_message
 
 class DataVisualizer:
     """Class to handle various data visualizations."""
