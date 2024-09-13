@@ -1,6 +1,9 @@
 import argparse
-from reporter import generate_report
-from exceptions import FileNotFoundError, UnsupportedFileFormatError
+import os
+import pandas as pd
+from src.reporter.reporter import generate_pdf_report, create_combined_summary_report
+from src.file_handler.fileHandler import get_handler, determine_file_format
+from src.utils.exceptions import FileNotFoundError, UnsupportedFileFormatError
 from rich.console import Console
 from rich.progress import track
 from rich.traceback import install
@@ -44,16 +47,17 @@ def report_command(args):
         Exception: For any other unexpected errors.
     """
     try:
-        for _ in track(range(1), description="Generating report..."):
-            report = generate_report(args.input, output_format=args.format)
+        file_format = determine_file_format(args.input)
+        handler = get_handler(file_format, args.input)
+        data_frame = handler.load_data()
 
-        if args.format == 'txt':
-            with open(args.output, 'w') as f:
-                f.write(report)
-            console.print(f"[bold green]Report successfully saved to {args.output}[/bold green]")
+        report_sections = create_combined_summary_report(data_frame)
 
-        elif args.format == 'pdf':
+        if args.format == 'pdf':
+            generate_pdf_report(report_sections, args.output, data_frame)
             console.print(f"[bold green]PDF report successfully saved to {args.output}[/bold green]")
+        elif args.format == 'txt':
+            raise NotImplementedError("Text report generation is not implemented.")
 
     except FileNotFoundError as e:
         console.print(f"[bold red]Error: Input file not found - {e.file_path}[/bold red]")
@@ -61,5 +65,7 @@ def report_command(args):
         console.print(f"[bold red]Error: {e.message}[/bold red]")
     except IOError as e:
         console.print(f"[bold red]Error: File operation failed - {e}[/bold red]")
+    except NotImplementedError as e:
+        console.print(f"[bold red]Error: {e}[/bold red]")
     except Exception as e:
         console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]")
