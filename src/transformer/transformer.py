@@ -3,6 +3,7 @@ from src.utils.exceptions import ColumnNotFoundError, DataValidationError
 
 class DataTransformer:
     """Class to handle various data transformations on Pandas DataFrames."""
+    
     def __init__(self, data):
         self.data = data.copy()
 
