@@ -1,105 +1,125 @@
-import argparse
+import click
 import pandas as pd
-from rich.console import Console
-from rich.progress import track
 from .transformer import DataTransformer
-from .exception_utils import ColumnNotFoundError, DataValidationError, render_error_message
 
-console = Console()
+@click.group(
+    help="""
+    **Data Transformation and Views Commands**
 
-def transformation_command(subparsers):
+    This group provides commands for performing various data transformations and viewing, such as:
+
+    - **Adding New Column to data**: Add a new column to the DataFrame with a specified value.\n
+    - **Dropping an entire Column**: Drop a column from the DataFrame.\n
+    - **Renaming a Column**: Rename a column in the DataFrame.\n
+    - **Viewing of the first top rows**: View the first `n` rows of the DataFrame.\n
+    - **Viewing of the last bottom rows**: View the last `n` rows of the DataFrame.\n
+
+    ### Examples:
+
+    1. **Add A New Column to data**:
+    \b
+    python cmd.py transform add-column input.csv --column_name 'Added_Column_Data.csv'
+
+    2. **Rename a Column**:
+    \b
+    python cmd.py transform rename-column input.csv --old_name 'Old Name' --new_name 'New Name' --output 'renamed_column_data.csv'
+    
+    1. **View the last `n` rows of the DataFrame**:
+    \b
+    python cmd.py transform view-tail input.csv --n 10 --output 'viewed_tail_data.csv'
+
     """
-    Define the command-line arguments and functionality for the 'transform' command.
+)
+def cli():
+    """A command-line interface for data cleaning using Standardizer, Basic_Cleaner, and TextOperations."""
+    pass
 
-    Args:
-        subparsers (argparse._SubParsersAction): The subparsers object from argparse.
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column_name', help='The name of the new column.')
+@click.option('--value', help='The value to be assigned to the new column. Can be a single value or a list/Series with length equal to the DataFrame.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def add_column(input_file, column_name , value, output):
+    """Add a new column to the DataFrame with a specified value."""
+    data = pd.read_csv(input_file)
+    column_add = DataTransformer(data)
+    transformed_data = column_add.add_column(column_name=column_name, value=value).data
 
-    Returns:
-        None
-    """
-    parser = subparsers.add_parser('transform', help="Transform data")
-    parser.add_argument('input', type=str, help="Input file path")
-    parser.add_argument('output', type=str, nargs='?', default=None, help="Output file path (optional)")
-    parser.add_argument('--sort', type=str, nargs='+', help="Column(s) to sort by")
-    parser.add_argument('--ascending', action='store_true', help="Sort in ascending order")
-    parser.add_argument('--filter', type=str, help="Condition to filter data by")
-    parser.add_argument('--transform', type=str, help="Custom transformation (lambda function) to apply to the data")
-    parser.add_argument('--add', nargs=2, metavar=('COLUMN', 'VALUE'), help="Add a value to a column")
-    parser.add_argument('--aggregate', type=str, choices=['sum', 'mean', 'count'], help="Aggregate data by a specified column")
-    parser.add_argument('--head', type=int, help="View the first n rows of the data")
-    parser.add_argument('--tail', type=int, help="View the last n rows of the data")
+    if output:
+        transformed_data.to_csv(output, index=False)
+    else:
+        print(transformed_data.head())
 
-    parser.set_defaults(func=transform_command)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column_name', help='The name of the column to drop.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def drop_column(input_file, column_name, output):
+    """Drop a column from the DataFrame."""
+    data = pd.read_csv(input_file)
+    column_drop = DataTransformer(data)
+    transformed_data = column_drop.drop_column(column_name=column_name).data
 
-def transform_command(args):
-    """
-    Execute data transformations based on command-line arguments.
+    if output:
+        transformed_data.to_csv(output, index=False)
+    else:
+        print(transformed_data.head())
 
-    Args:
-        args (argparse.Namespace): The command-line arguments parsed by argparse.
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--old_name', help='The name of the column to drop.')
+@click.option('--new_name', help='The name of the column to drop.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def rename_column(input_file,old_name, new_name, output):
+    """Rename a column in the DataFrame."""
+    data = pd.read_csv(input_file)
+    column_renamed = DataTransformer(data)
+    transformed_data = column_renamed.rename_column(old_name=old_name, new_name=new_name).data
 
-    Returns:
-        None
-    """
-    try:
-        console.print(f"[green]Reading data from {args.input}...[/green]")
-        data_frame = pd.read_csv(args.input)
-    except FileNotFoundError:
-        console.print(render_error_message(FileNotFoundError(args.input)))
-        return
-    except pd.errors.EmptyDataError:
-        console.print(render_error_message(DataValidationError("Input file is empty or cannot be read.")))
-        return
+    if output:
+        transformed_data.to_csv(output, index=False)
+    else:
+        print(transformed_data.head())
 
-    transformer = DataTransformer()
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--n', default=5, help=' The number of rows to display. Defaults to 5.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def view_head(input_file,n, output):
+    """View the first `n` rows of the DataFrame."""
+    data = pd.read_csv(input_file)
+    data_viewed = DataTransformer(data)
+    transformed_data = data_viewed.view_head(n=n).data
 
-    try:
-        for _ in track(range(1), description="Transforming data..."):
+    if output:
+       transformed_data.to_csv(output, index=False)
+    else:
+        print(transformed_data.head())
 
-            if args.sort:
-                console.print(f"[cyan]Sorting data by {args.sort} in {'ascending' if args.ascending else 'descending'} order...[/cyan]")
-                data_frame = transformer.sort_data(data_frame, by=args.sort, ascending=args.ascending)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--n', default=5, help=' The number of rows to display. Defaults to 5.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def view_tail(input_file,n, output):
+    """View the last `n` rows of the DataFrame."""
+    data = pd.read_csv(input_file)
+    data_viewed = DataTransformer(data)
+    transformed_data = data_viewed.view_tail(n=n).data
 
-            if args.filter:
-                console.print(f"[cyan]Filtering data with condition: {args.filter}...[/cyan]")
-                data_frame = transformer.filter_data(data_frame, condition=args.filter)
+    if output:
+        transformed_data.to_csv(output, index=False)
+    else:
+        print(transformed_data.head())
 
-            if args.transform:
-                console.print(f"[cyan]Applying custom transformation...[/cyan]")
-                func = eval(args.transform)
-                data_frame = transformer.apply_custom_transformation(data_frame, func)
 
-            if args.add:
-                column, value = args.add
-                console.print(f"[cyan]Adding value {value} to column {column}...[/cyan]")
-                if column not in data_frame.columns:
-                    raise ColumnNotFoundError(column)
-                data_frame[column] += float(value)
+"""
+Add commands to the main CLI group
+"""
+cli.add_command(add_column)
+cli.add_command(drop_column)
+cli.add_command(rename_column)
+cli.add_command(view_head)
+cli.add_command(view_tail)
 
-            if args.aggregate:
-                console.print(f"[cyan]Aggregating data by {args.sort} using {args.aggregate} function...[/cyan]")
-                aggregation_func = {'sum': 'sum', 'mean': 'mean', 'count': 'count'}
-                data_frame = data_frame.groupby(args.sort).agg(aggregation_func[args.aggregate])
-
-            if args.head:
-                console.print(f"[cyan]Displaying first {args.head} rows...[/cyan]")
-                console.print(data_frame.head(args.head))
-                return
-
-            if args.tail:
-                console.print(f"[cyan]Displaying last {args.tail} rows...[/cyan]")
-                console.print(data_frame.tail(args.tail))
-                return
-
-        if args.output:
-            console.print(f"[green]Saving transformed data to {args.output}...[/green]")
-            data_frame.to_csv(args.output, index=False)
-            console.print(f"[bold green]Transformed data successfully saved to {args.output}[/bold green]")
-        else:
-            console.print(data_frame)
-
-    except (ColumnNotFoundError, DataValidationError) as e:
-        console.print(render_error_message(e))
-
-    except Exception as e:
-        console.print(f"[bold red]An unexpected error occurred: {str(e)}[/bold red]")
+if __name__ == '__main__':
+    cli()

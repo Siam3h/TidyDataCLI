@@ -1,101 +1,139 @@
-import argparse
+import click
 import pandas as pd
-import numpy as np
-from rich.console import Console
-from rich.progress import track
-from .cleaner import DataCleaner
-from .exception_utils import (
-    ColumnNotFoundError, DataMismatchError, UnsupportedFormatError, FileNotFoundError,
-    UnsupportedFileFormatError, DataValidationError, render_error_message
+from .cleaner import Standardizer, Basic_Cleaner, TextOperations
+
+@click.group(
+    help="""
+    **Data Cleaning Commands**
+
+    This group provides commands for performing various data cleaning tasks, such as:
+
+    - **Handling Missing Values**: Remove or fill missing values in the dataset.\n
+    - **Trimming Whitespace**: Remove extra spaces from text columns.\n
+    - **Applying Regex Patterns**: Search and replace text based on regular expressions.\n
+    - **Changing Text Case**: Convert text columns to lower, upper, title, or capitalized case.\n
+    - **Standardizing Currency**: Remove currency symbols and convert values to numeric format.\n
+    - **Standardizing Date Formats**: Convert date columns to a specified format.\n
+
+    ### Examples:
+
+    1. **Standardize a Date Column**:
+    \b
+    python cmd.py clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'
+
+    2. **Handle Missing Values by Filling**:
+    \b
+    python cmd.py clean handle-missing-values input.csv --method 'fill' --fill_value 'N/A' --output 'filled_data.csv'
+    """
 )
+def cli():
+    """A command-line interface for data cleaning using Standardizer, Basic_Cleaner, and TextOperations."""
+    pass
 
-console = Console()
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column', help='The name of the date column to standardize.')
+@click.option('--date_format', default='%Y-%m-%d', help='The desired date format (default is %Y-%m-%d).')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def standardize_date(input_file, column, date_format, output):
+    """Standardize the format of a date column."""
+    data = pd.read_csv(input_file)
+    standardizer = Standardizer(data)
+    cleaned_data = standardizer.standardize_date(column=column, date_format=date_format).data
 
-class CleaningCommand:
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-    @staticmethod
-    def add_cleaning_subparser(subparsers):
-        """Add subparser for the clean command with multiple options."""
-        parser = subparsers.add_parser('clean', help="Clean data with various operations")
-        parser.add_argument('input', type=str, help="Path to input CSV file")
-        parser.add_argument('output', type=str, help="Path to output cleaned CSV file")
-        parser.add_argument('--remove_duplicates', action='store_true', help="Remove duplicate rows")
-        parser.add_argument('--clean_columns', action='store_true', help="Clean column names (strip spaces, lowercase)")
-        parser.add_argument('--trim_spaces', action='store_true', help="Trim spaces in string columns")
-        parser.add_argument('--validate_data', action='store_true', help="Validate and clean data")
-        parser.add_argument('--change_case', type=str, choices=['lower', 'upper', 'title', 'capitalize'], help="Change case of string columns")
-        parser.add_argument('--standardize_date', type=str, help="Standardize date format for a column")
-        parser.add_argument('--regex_clean', type=str, nargs=2, metavar=('COLUMN', 'PATTERN'), help="Apply a regex pattern to clean a column")
-        parser.add_argument('--handle_missing', type=str, choices=['drop', 'fill'], help="Handle missing values by dropping or filling")
-        parser.add_argument('--fill_value', type=str, help="Specify fill value for missing values")
-        parser.add_argument('--outlier_method', type=str, choices=['remove', 'cap'], help="Handle outliers in numeric data")
-        parser.add_argument('--standardize_currency', type=str, help="Standardize currency format in a column")
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column', help='The name of the currency column to standardize.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def standardize_currency(input_file, column, output):
+    """Standardize currency format by removing symbols and converting to float."""
+    data = pd.read_csv(input_file)
+    standardizer = Standardizer(data)
+    cleaned_data = standardizer.standardize_currency(column=column).data
 
-        parser.set_defaults(func=CleaningCommand.clean_command)
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-    @staticmethod
-    def clean_command(args):
-        """Execute the clean command based on the provided arguments."""
-        try:
-            console.print(f"[green]Reading data from {args.input}...[/green]")
-            data_frame = pd.read_csv(args.input)
-            data_cleaner = DataCleaner(data_frame)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def trim_spaces(input_file, output):
+    """Trim extra spaces in all string columns."""
+    data = pd.read_csv(input_file)
+    cleaner = Basic_Cleaner(data)
+    cleaned_data = cleaner.trim_spaces().data
 
-            with console.status("[bold green]Cleaning data...[/bold green]") as status:
-                if args.clean_columns:
-                    console.print("[cyan]Cleaning column names...[/cyan]")
-                    data_cleaner.basic_cleaner.clean_column_names()
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-                if args.trim_spaces:
-                    console.print("[cyan]Trimming spaces in string columns...[/cyan]")
-                    data_cleaner.basic_cleaner.basic_cleaning()
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--method', default='drop', type=click.Choice(['drop', 'fill']), help='Method to handle missing values (drop or fill).')
+@click.option('--fill_value', default=None, help='Value to fill missing values with if "fill" method is chosen.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def handle_missing_values(input_file, method, fill_value, output):
+    """Handle missing values in the data."""
+    data = pd.read_csv(input_file)
+    cleaner = Basic_Cleaner(data)
+    cleaned_data = cleaner.handle_missing_values(method=method, fill_value=fill_value).data
 
-                if args.remove_duplicates:
-                    console.print("[cyan]Removing duplicate rows...[/cyan]")
-                    data_cleaner.error_handler.clean_duplicates()
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-                if args.validate_data:
-                    console.print("[cyan]Validating and cleaning data...[/cyan]")
-                    data_cleaner.error_handler.validate_data()
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column', help='The column to apply regex cleaning.')
+@click.option('--pattern', help='The regex pattern to search for.')
+@click.option('--replacement', help='The string to replace the pattern with.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the cleaned data (optional).')
+def apply_regex_cleaning(input_file, column, pattern, replacement, output):
+    """Apply regex cleaning to a specified column."""
+    data = pd.read_csv(input_file)
+    cleaner = Basic_Cleaner(data)
+    cleaned_data = cleaner.apply_regex_cleaning(column=column, pattern=pattern, replacement=replacement).data
 
-                if args.change_case:
-                    console.print(f"[cyan]Changing text case to {args.change_case}...[/cyan]")
-                    data_cleaner.text_operations.change_case(operation=args.change_case)
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-                if args.standardize_date:
-                    console.print(f"[cyan]Standardizing date format for column {args.standardize_date}...[/cyan]")
-                    data_cleaner.format_standardizer.standardize_date(column=args.standardize_date)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--columns', default=None, help='Comma-separated list of columns to apply the transformation. If None, all text columns are used.')
+@click.option('--operation', default='lower', type=click.Choice(['lower', 'upper', 'title', 'capitalize']), help='Case transformation operation.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the transformed data (optional).')
+def change_case(input_file, columns, operation, output):
+    """Change the case of text in specified columns."""
+    data = pd.read_csv(input_file)
+    columns_list = columns.split(',') if columns else None
+    text_ops = TextOperations(data)
+    cleaned_data = text_ops.change_case(operation=operation, columns=columns_list).data
 
-                if args.regex_clean:
-                    column, pattern = args.regex_clean
-                    console.print(f"[cyan]Cleaning column '{column}' with regex pattern: {pattern}...[/cyan]")
-                    data_cleaner.text_operations.apply_regex_cleaning(column, pattern, '')
+    if output:
+        cleaned_data.to_csv(output, index=False)
+    else:
+        print(cleaned_data.head())
 
-                if args.handle_missing == 'drop':
-                    console.print("[cyan]Dropping rows with missing values...[/cyan]")
-                    data_cleaner.missing_value_handler.handle_missing_values(method='drop')
+"""
+Adding commands to the main CLI group
+"""
+cli.add_command(standardize_date)
+cli.add_command(standardize_currency)
+cli.add_command(trim_spaces)
+cli.add_command(handle_missing_values)
+cli.add_command(apply_regex_cleaning)
+cli.add_command(change_case)
 
-                elif args.handle_missing == 'fill':
-                    console.print(f"[cyan]Filling missing values with {args.fill_value if args.fill_value else 'default value'}...[/cyan]")
-                    fill_value = args.fill_value if args.fill_value else 0
-                    data_cleaner.missing_value_handler.handle_missing_values(method='fill', fill_value=fill_value)
-
-                if args.outlier_method:
-                    console.print(f"[cyan]Handling outliers using method: {args.outlier_method}...[/cyan]")
-                    data_cleaner.outlier_handler.handle_outliers(method=args.outlier_method)
-
-                if args.standardize_currency:
-                    console.print(f"[cyan]Standardizing currency format in column {args.standardize_currency}...[/cyan]")
-                    data_cleaner.format_standardizer.standardize_currency(column=args.standardize_currency)
-
-            output_file = args.output
-            console.print(f"[green]Saving cleaned data to {output_file}...[/green]")
-            data_cleaner.data.to_csv(output_file, index=False)
-
-            console.print(f"[bold green]Cleaned data successfully saved to {output_file}[/bold green]")
-
-        except (FileNotFoundError, ColumnNotFoundError, UnsupportedFileFormatError, DataValidationError) as e:
-            console.print(f"[bold red]{render_error_message(e)}[/bold red]")
-
-        except Exception as e:
-            console.print(f"[bold red]An unexpected error occurred: {str(e)}[/bold red]")
+if __name__ == '__main__':
+    cli()
