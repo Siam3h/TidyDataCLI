@@ -1,0 +1,372 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_visualiser.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\test_visualiser.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\utils\\exceptions.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\exceptions.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\visualiser\\visualiser.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\transformer\\transformer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\reporter\\reporter.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\cleaner\\cleaner.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\setup.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:setup.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\cleaner\\cleaner_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\USAGE.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:docs\\USAGE.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:docs\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\INSTALL.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:docs\\INSTALL.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\reporter\\reporter_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\transformer\\transformer_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\visualiser\\visualiser_cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\cmd.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_cleaner.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\test_cleaner.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_transformer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\test_transformer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\utils.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\visualiser\\utils.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 224,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "test_visualiser.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_visualiser.py",
+              "RelativeDocumentMoniker": "tests\\test_visualiser.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_visualiser.py",
+              "RelativeToolTip": "tests\\test_visualiser.py",
+              "ViewState": "AQIAABcAAAAALDMzMzMbwB0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-29T09:11:07.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "transformer.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer.py",
+              "RelativeDocumentMoniker": "src\\transformer\\transformer.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer.py",
+              "RelativeToolTip": "src\\transformer\\transformer.py",
+              "ViewState": "AQIAAEwAAAAAhpmZmZkewAUAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:22:04.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "exceptions.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\utils\\exceptions.py",
+              "RelativeDocumentMoniker": "src\\utils\\exceptions.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\utils\\exceptions.py",
+              "RelativeToolTip": "src\\utils\\exceptions.py",
+              "ViewState": "AQIAABQAAABAMjMzMzMbwA8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:03:18.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "reporter.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter.py",
+              "RelativeDocumentMoniker": "src\\reporter\\reporter.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter.py",
+              "RelativeToolTip": "src\\reporter\\reporter.py",
+              "ViewState": "AQIAAHUAAAAALTMzM5MwwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:02:44.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "cleaner.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner.py",
+              "RelativeDocumentMoniker": "src\\cleaner\\cleaner.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner.py",
+              "RelativeToolTip": "src\\cleaner\\cleaner.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGkAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:02:20.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "requirements.txt",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\requirements.txt",
+              "RelativeDocumentMoniker": "requirements.txt",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\requirements.txt",
+              "RelativeToolTip": "requirements.txt",
+              "ViewState": "AQIAABIAAAAAAAAAAAAiwB4AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-10-03T14:32:09.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AQIAAGcAAAAAeGZmZmYkwHcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-10-19T16:35:10.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "cleaner_cmd.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner_cmd.py",
+              "RelativeDocumentMoniker": "src\\cleaner\\cleaner_cmd.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cleaner\\cleaner_cmd.py",
+              "RelativeToolTip": "src\\cleaner\\cleaner_cmd.py",
+              "ViewState": "AQIAAB4AAAAAbDIzMzPbv4IAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:02:27.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "reporter_cmd.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter_cmd.py",
+              "RelativeDocumentMoniker": "src\\reporter\\reporter_cmd.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\reporter\\reporter_cmd.py",
+              "RelativeToolTip": "src\\reporter\\reporter_cmd.py",
+              "ViewState": "AQIAAEwAAAAAZmZmZiYgwBcAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:02:53.242Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 167,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "INSTALL.md",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\INSTALL.md",
+              "RelativeDocumentMoniker": "docs\\INSTALL.md",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\INSTALL.md",
+              "RelativeToolTip": "docs\\INSTALL.md",
+              "ViewState": "AQIAAB0AAAAAAAAAAACIPSsAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-10-19T16:41:07.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "setup.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\setup.py",
+              "RelativeDocumentMoniker": "setup.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\setup.py",
+              "RelativeToolTip": "setup.py",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAwwAQAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T14:01:14.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "visualiser.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser.py",
+              "RelativeDocumentMoniker": "src\\visualiser\\visualiser.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser.py",
+              "RelativeToolTip": "src\\visualiser\\visualiser.py",
+              "ViewState": "AQIAAO8AAAAAemZmZuYswAoAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:44:52.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\README.md",
+              "RelativeDocumentMoniker": "docs\\README.md",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\README.md",
+              "RelativeToolTip": "docs\\README.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-10-19T16:41:24.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "USAGE.md",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\USAGE.md",
+              "RelativeDocumentMoniker": "docs\\USAGE.md",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\docs\\USAGE.md",
+              "RelativeToolTip": "docs\\USAGE.md",
+              "ViewState": "AQIAAGUAAAAA9P////8AwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-10-19T16:41:28.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "transformer_cmd.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer_cmd.py",
+              "RelativeDocumentMoniker": "src\\transformer\\transformer_cmd.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\transformer\\transformer_cmd.py",
+              "RelativeToolTip": "src\\transformer\\transformer_cmd.py",
+              "ViewState": "AQIAAAAAAADxYWZmZiYgwBwAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:22:17.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "visualiser_cmd.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser_cmd.py",
+              "RelativeDocumentMoniker": "src\\visualiser\\visualiser_cmd.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\visualiser_cmd.py",
+              "RelativeToolTip": "src\\visualiser\\visualiser_cmd.py",
+              "ViewState": "AQIAADAAAACAZmZmZuYswH8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:46:34.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "cmd.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cmd.py",
+              "RelativeDocumentMoniker": "src\\cmd.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\cmd.py",
+              "RelativeToolTip": "src\\cmd.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:40:08.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "test_cleaner.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_cleaner.py",
+              "RelativeDocumentMoniker": "tests\\test_cleaner.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_cleaner.py",
+              "RelativeToolTip": "tests\\test_cleaner.py",
+              "ViewState": "AQIAAEwAAAAY9P////8twFYAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T13:08:22.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "test_transformer.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_transformer.py",
+              "RelativeDocumentMoniker": "tests\\test_transformer.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\tests\\test_transformer.py",
+              "RelativeToolTip": "tests\\test_transformer.py",
+              "ViewState": "AQIAACcAAACAHDMzMzMLwAgAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T13:08:18.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001407|",
+              "WhenOpened": "2024-10-03T08:47:48.496Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "utils.py",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\utils.py",
+              "RelativeDocumentMoniker": "src\\visualiser\\utils.py",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\TidyDataCLI\\src\\visualiser\\utils.py",
+              "RelativeToolTip": "src\\visualiser\\utils.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-10-03T07:44:50.764Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

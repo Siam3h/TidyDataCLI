@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\docs",
+    "\\src",
+    "\\src\\cleaner",
+    "\\src\\reporter",
+    "\\src\\transformer",
+    "\\src\\utils",
+    "\\src\\visualiser",
+    "\\tests"
+  ],
+  "SelectedNode": "\\tests\\test_visualiser.py",
+  "PreviewInSolutionExplorer": false
+}
