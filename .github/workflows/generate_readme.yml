@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: 🛠️ Run generate_readme.py
+      - name: 🛠️ Run docs/generate_readme.py
         run: python generate_readme.py
 
       - name: 🚀 Commit and push changes
