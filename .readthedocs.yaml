@@ -8,4 +8,4 @@ build:
     - asdf global python 3.9.22
     - pip install mkdocs
     - cd docs
-    - mkdocs build --config-file mkdocs.yml --site-dir $READTHEDOCS_OUTPUT/html
+    - mkdocs build --config-file docs/mkdocs.yml --site-dir $READTHEDOCS_OUTPUT/html
