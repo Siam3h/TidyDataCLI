@@ -1,8 +1,17 @@
-![TidyDataCLI Logo](https://github.com/Siam3h/TidyDataCLI/blob/main/TidyDataCLI.jpg)
+# TidyDataCLI Documentation
 
-# TidyDataCLI
+## 📚 Table of Contents
 
-## **Overview**
+- [Home](#home)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tutorials](#tutorials)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+
+<details>
+<summary><strong>Home</strong></summary>
 
 [![GitHub stars](https://img.shields.io/github/stars/Siam3h/tidydatacli?style=social)](https://github.com/Siam3h/tidydatacli/stargazers)
 [![PyPI version](https://img.shields.io/pypi/v/tidydatacli)](https://pypi.org/project/tidydatacli/)
@@ -10,186 +19,262 @@
 [![GitHub issues](https://img.shields.io/github/issues/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/issues)
 [![GitHub license](https://img.shields.io/github/license/Siam3h/tidydatacli)](https://github.com/Siam3h/tidydatacli/blob/main/LICENSE)
 
-TidyDataCLI is a command-line tool built for automating the process of cleaning, transforming, and visualizing Excel/CSV data. Designed to be cross-platform, it can run seamlessly on Linux, macOS, and Windows, and can even be used through Docker without requiring Python to be installed.
+TidyDataCLI is a powerful command-line tool designed to streamline the process of cleaning, transforming, visualizing, and reporting on Excel and CSV data. 
+It is particularly useful for data analysts, researchers, and anyone working with tabular data who needs an efficient way to prepare data for analysis. 
+The tool adheres to the principles of "tidy data," ensuring datasets are structured for easy analysis. <br>
 
-**Why use TidyDataCLI?**  
-With its wide range of features, TidyDataCLI simplifies complex data tasks, offering tools for:
+TidyDataCLI is cross-platform, running seamlessly on Linux, macOS, Windows, and via Docker, making it accessible without requiring a local Python installation.
 
-- **Data Cleaning**: Remove duplicates, standardize column names, trim spaces, validate ages, and much more.
-- **Data Transformation**: Sort, filter, apply custom transformations, and aggregate data effortlessly.
-- **Visualization**: Generate professional-grade charts like bar charts, word clouds, heat maps, and Gantt charts.
-- **Report Generation**: Create detailed PDF or text reports directly from your data files.
+##### Features
+TidyDataCLI offers a comprehensive set of features categorized into four main areas: <br> Data Cleaning, Data Transformation, Visualization, and Report Generation.
 
----
+##### Cross-Platform Compatibility
 
-## **Features**
-
-### Data Cleaning
-	- Remove Duplicates: Efficiently remove duplicate entries from your dataset.
-	- Regex Cleaning: Sanitize data using customizable regular expressions.
-	- Column Name Cleaning: Standardize column names by stripping spaces and converting to lowercase.
-	- Trim Spaces: Remove leading and trailing spaces from string columns.
-	- Age Validation: Validate and clean 'age' columns to ensure data integrity.
-	- Change Case: Convert text columns to lowercase, uppercase, title case, or capitalize.
-	- Date Standardization: Standardize date formats across specified columns.
-
-### Data Transformation
-	- Sorting: Sort data by one or more columns with ascending or descending options.
-	- Filtering: Apply conditions to filter rows based on specified criteria.
-	- Custom Transformations: Apply user-defined lambda functions for complex transformations.
-	- Column Addition: Add values to existing columns and perform arithmetic operations.
-	- Aggregation: Aggregate data by summing, averaging, or counting grouped values.
-
-### Visualization
-	- Bar Charts: Generate bar charts with customizable x and y axes.
-	- Pie Charts: Create pie charts with labels and values for visualization.
-	- Word Clouds: Visualize text data using word clouds.
-	- Line Charts: Plot line charts for trend analysis.
-	- Box-and-Whisker Plots: Create box plots to analyze data distributions.
-	- Gantt Charts: Visualize project timelines with Gantt charts.
-	- Heat Maps: Generate heat maps to represent data density.
-	- Histograms: Plot histograms with adjustable bin sizes.
-	- Tree Maps: Visualize hierarchical data using tree maps.
-
-### Report Generation
-
-### Cross-Platform
-	  - Runs on Linux, macOS, and Windows and Docker Environments
-
----
-
-## **Table of Contents**
-- [Installation](#installation)
-- [Usage](#usage)
-- [Commands Overview](#commands-overview)
-- [Cleaning Data](#cleaning-data)
-- [Transforming Data](#transforming-data)
-- [Visualizing Data](#visualizing-data)
-- [Report Generation](#report-generation)
-- [Running with Docker](#running-with-docker)
-- [Error Handling](#error-handling)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## **Installation**
-
-### **Requirements**
-- Python 3.7+
-- Pip (Python package manager)
-- Docker (Optional, for containerized execution)
-
-### **Install via pip**
-```bash
-pip install TidyDataCLI
-```
-
-### **Install from Source**
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Siam3h/tidydatacli.git
-   ```
-2. Navigate to the directory:
-   ```bash
-   cd tidydatacli
-   ```
-3. Install the package:
-   ```bash
-   pip install .
-   ```
-
-### **Running with Docker**
-For a containerized approach:
-1. Pull the Docker image:
-   ```bash
-   docker pull tidydatacli
-   ```
-2. Run TidyDataCLI via Docker:
-   ```bash
-   docker run -v $(pwd):/data tidydatacli tidydata <command> --input /data/input.csv --output /data/output.csv
-   ```
-
----
-
-## **Usage**
-
-Once installed, TidyDataCLI can be invoked using the following syntax:
-
-```bash
-tidydata <command> [options]
-```
-
-### **Example Commands**
-
-#### Cleaning Data:
-```bash
-tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns
-```
-
-#### Transforming Data:
-```bash
-tidydata transform --input data.csv --output transformed.csv --sort column1 --filter "age > 30"
-```
-
-#### Visualizing Data:
-```bash
-tidydata visualize accounts.csv --type bar --x 'BILL TO' --y 'INVOICE NUMBER' --output bill_invoice_number.png
-```
-
-#### Generating Reports:
-```bash
-tidydata report accounts.xlsx report.pdf --format pdf
-```
+Runs on Linux, macOS, Windows, and Docker, ensuring flexibility across different environments.
 
 
-## **Commands Overview**
+To follow the project and it's releases visit [github](https://github.com/siam3h/tidydatacli).
 
-### 1. `clean`
-Clean your dataset by removing duplicates, trimming spaces, or performing regex-based cleaning.
+</details>
 
-### 2. `transform`
-Apply transformations such as sorting, filtering, adding columns, and custom lambda functions.
+<details>
+<summary><strong>Installation</strong></summary>
 
-### 3. `visualize`
-Create visual representations of your data, such as bar charts, pie charts, and word clouds.
+#### Requirements
 
-### 4. `report`
-Generate reports in **text** or **PDF** format with customizable summaries or detailed outputs.
+* `Python 3.7 or higher`: Required for native installation. <br>
+* `Pip`: Python package manager for installing dependencies.  <br>
+* `Docker (Optional)`: For containerized execution. <br>
 
+#### Install via pip
+The simplest way to install TidyDataCLI is using pip. <br>
 
-## **Running with Docker**
+`pip install TidyDataCLI`
 
-To avoid dependency management, you can use Docker:
-```bash
-docker run -v $(pwd):/data tidydatacli tidydata clean --input /data/input.csv --output /data/output.csv
-```
+#### Install from Source
+To install from the source code:<br>
 
-
-## **Error Handling**
-
-Error messages are displayed for common issues like file not found, invalid columns, or missing options.
-
-Example error:
-```bash
-Error: Input file 'non_existent_file.csv' not found.
-```
+Clone the repository: `git clone https://github.com/Siam3h/TidyDataCLI`
 
 
-## **Contributing**
-
-We welcome contributions!  
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and submit a pull request.
-
-Find issues or suggestions? Please open an [issue](https://github.com/Siam3h/tidydatacli/issues) on GitHub.
+Navigate to the repository directory: `cd tidydatacli`
 
 
-## **License**
+Install the package: `pip install`
 
-TidyDataCLI is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+#### Running with Docker
+For users preferring a containerized environment: <br>
 
-## **Contact**
+Pull the Docker image: `docker pull tidydatacli`
 
-For any questions or issues, please contact Siama at [siamaphilbert@outlook.com](mailto:siamaphilbert@outlook.com).
+
+Run the tool, mounting the current directory to, <br> Example: `/data:docker run -v $(pwd):/data tidydatacli tidydata <command> --input /data/input.csv --output /data/output.csv`
+
+</details>
+
+<details>
+<summary><strong>Usage</strong></summary>
+
+#### Overview
+TidyDataCLI supports four primary commands:<br>
+
+clean: Performs data cleaning tasks like removing duplicates or standardizing formats. <br>
+
+transform: Applies transformations such as sorting, filtering, or adding columns. <br>
+
+visualize: Generates visual representations like charts or word clouds. <br>
+
+report: Creates reports in text or PDF format.<br>
+
+###### Command Options
+For a complete list of options.
+
+`tidydata <command> --help` 
+
+###### 1) Data Cleaning
+
+Remove Duplicates: Eliminates duplicate rows to ensure data integrity.<br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Regex Cleaning: Uses regular expressions to remove or replace unwanted patterns in text data. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Column Name Cleaning: Standardizes column names by removing spaces, special characters, or converting to a consistent case. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Trim Spaces: Removes leading and trailing spaces from text fields. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Age Validation: Validates age data to ensure it falls within a specified range. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Change Case: Converts text to upper, lower, or title case for consistency. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Date Standardization: Converts dates to a uniform format (e.g., YYYY-MM-DD). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+##### 2) Data Transformation
+
+Sorting: Sorts data by one or more columns in ascending or descending order. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Filtering: Extracts subsets of data based on user-defined conditions. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Custom Transformations: Applies custom lambda functions for advanced data manipulation. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Column Addition: Creates new columns based on calculations or existing data. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Aggregation: Performs summary operations like sum, mean, count, min, or max.
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+##### 3) Visualization
+TidyDataCLI supports various visualization types to help users explore and communicate data insights: <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Bar Charts: Compare categorical data (e.g., sales by region). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Pie Charts: Show proportions (e.g., market share). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Word Clouds: Visualize text data by highlighting frequent terms. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Line Charts: Display trends over time (e.g., monthly revenue). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Box-and-Whisker Plots: Show data distribution and outliers. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Gantt Charts: Visualize project timelines or schedules. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Heat Maps: Highlight patterns in numerical data (e.g., correlation matrices). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Histograms: Display the distribution of numerical data (e.g., age distributions). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+Tree Maps: Represent hierarchical data (e.g., organizational structures). <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+##### 4) Report Generation
+
+Generates reports in text or PDF format, customizable with summary statistics, visualizations, or detailed data tables. <br>
+`tidydata clean standardize-date input.csv --column 'Join Date' --output 'standardized_dates.csv'`
+
+</details>
+
+<details>
+<summary><strong>Tutorials</strong></summary>
+
+This section provides step-by-step guides for common tasks using TidyDataCLI. <br>
+
+Assuming a sample dataset data.csv with columns name, age, date, category, and value. <br>
+
+##### Cleaning a Dataset
+
+###### Remove Duplicates and Clean Column Names
+
+To remove duplicate rows and standardize column names <br>(e.g., converting "Customer Name" to "customer_name"): <br>
+`tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns`
+
+Trim SpacesTo remove leading/trailing spaces from text fields: <br>
+`tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns --trim_spaces`
+
+Standardize DatesTo convert dates to a uniform format (e.g., YYYY-MM-DD):<br>
+`tidydata clean --input data.csv --output cleaned_data.csv --remove_duplicates --clean_columns --trim_spaces --standardize_dates`
+
+Validate Age DataTo ensure age values are within a reasonable range (e.g., 0–120): <br>
+`tidydata clean --input data.csv --output cleaned_data.csv --validate_age`
+
+</details>
+
+<details>
+<summary><strong>Best Practices</strong></summary>
+
+To maximize the effectiveness of TidyDataCLI:
+
+###### Backup Data <br>
+Always work on a copy of your original dataset to prevent data loss. <br>
+
+###### Use Descriptive File Names<br>
+Name output files clearly (e.g., cleaned_data_2025-06-21.csv) to track processing steps. <br>
+
+###### Check for Updates <br>
+Regularly visit the GitHub repository for new features or bug fixes. <br>
+
+###### Use Docker for Consistency <br> 
+For team workflows or cross-system use, leverage Docker to avoid dependency issues. <br>
+
+###### Validate Data Early <br> 
+Use cleaning and validation options (e.g., --validate_age) to catch errors before transformations. <br>
+
+###### Optimize Visualizations <br> 
+Ensure columns selected for visualizations match the chart type (e.g., numerical data for histograms).<br>
+
+###### Document Workflows<br>
+Record commands and transformations for reproducibility, especially in complex projects. <br>
+
+###### Handle Large Datasets<br>
+For large files, monitor system resources and consider splitting-objcopy <br>
+
+</details>
+
+<details>
+<summary><strong>Troubleshooting</strong></summary>
+
+### Common issues and solutions:
+
+###### File Not Found <br> 
+Verify the file path and ensure the file exists.<br> 
+###### Invalid Input Format <br> 
+Confirm the file is a valid CSV or Excel file and not corrupted.<br> 
+###### Command Usage Errors<br> 
+Check syntax using `tidydata <command> --help.`<br> 
+###### Performance Issues<br> 
+For large datasets, use Docker or ensure sufficient system memory.<br> 
+###### Visualization Errors<br>  
+Ensure selected columns exist and match the expected data type (e.g., numerical for histograms)<br> 
+
+For unresolved issues, visit the [Github Issues Page](https://github.com/siam3h/tidydatacli/issues) or contact the. maintainer, [siama](mailto:siama@codegenies.org). <br> 
+
+###### Error Handling
+TidyDataCLI provides informative error messages for common issues, such as file not found, invalid formats, or incorrect command usage. <br> 
+
+Always consult the `tidydata <command> --help.` option for correct syntax and refer to the troubleshooting section for guidance.
+
+</details>
+
+<details>
+<summary><strong>Contributing</strong></summary>
+
+### Contributions are welcome! 
+
+To contribute:
+
+Fork the repository on [Github](https://github.com/siam3h/tidydatacli). <br>
+
+Create a branch for your changes.<br>
+
+Submit a pull request with your improvements or bug fixes. <br>
+
+Report issues or suggest features via the [Github Issues Page](https://github.com/siam3h/tidydatacli/issues). <br>
+
+Refer to the [Github](https://github.com/siam3h/tidydatacli) repository’s contributing guidelines for detailed instructions.
+
+###### License
+TidyDataCLI is released under the MIT License.
+
+###### Contact
+For support or feedback, contact the maintainer at [Philbert Siama](mailto:siama@codegenies.org).
+
+###### About
+Developed by [Philbert Siama](https://siama.codegenies.org), TidyDataCLI aims to provide a user-friendly, powerful tool for data preparation. It is actively maintained and open to community contributions.
+
+</details>
+
