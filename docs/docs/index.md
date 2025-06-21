@@ -1,21 +1,21 @@
 <p align="left">
   <a href="https://github.com/Siam3h/tidydatacli/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/Siam3h/tidydatacli?style=flat-square&color=FFD700">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/Siam3h/tidydatacli?style=for-the-badge&color=ffd700&logo=github">
   </a>
   <a href="https://pepy.tech/project/tidydatacli">
-    <img alt="Total downloads" src="https://static.pepy.tech/badge/tidydatacli">
+    <img alt="Total downloads" src="https://static.pepy.tech/badge/tidydatacli?style=for-the-badge">
   </a>
   <a href="https://github.com/Siam3h/tidydatacli/network/members">
-    <img alt="GitHub forks" src="https://img.shields.io/github/forks/Siam3h/tidydatacli?style=flat-square&color=8B5CF6">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/Siam3h/tidydatacli?style=for-the-badge&color=8b5cf6&logo=github">
   </a>
   <a href="https://pypi.org/project/tidydatacli/">
-    <img alt="PyPI version" src="https://img.shields.io/pypi/v/tidydatacli?style=flat-square&color=34D399">
+    <img alt="PyPI version" src="https://img.shields.io/pypi/v/tidydatacli?style=for-the-badge&color=34d399&logo=pypi">
   </a>
   <a href="https://github.com/Siam3h/tidydatacli/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/Siam3h/tidydatacli?style=flat-square&color=F97316">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/Siam3h/tidydatacli?style=for-the-badge&color=f97316&logo=github">
   </a>
   <a href="https://github.com/Siam3h/tidydatacli/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/Siam3h/tidydatacli?style=flat-square&color=38BDF8">
+    <img alt="License" src="https://img.shields.io/github/license/Siam3h/tidydatacli?style=for-the-badge&color=38bdf8&logo=open-source-initiative">
   </a>
 </p>
 
