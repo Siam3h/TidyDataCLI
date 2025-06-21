@@ -1,22 +1,9 @@
 <p align="left">
-  <a href="https://pepy.tech/project/tidydatacli">
-    <img alt="Total downloads" height="28" src="https://static.pepy.tech/badge/tidydatacli">
-  </a>
-  <a href="https://github.com/Siam3h/tidydatacli/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/Siam3h/tidydatacli?style=for-the-badge&color=ffd700&logo=github">
-  </a>
-  <a href="https://github.com/Siam3h/tidydatacli/network/members">
-    <img alt="GitHub forks" src="https://img.shields.io/github/forks/Siam3h/tidydatacli?style=for-the-badge&color=8b5cf6&logo=github">
-  </a>
-  <a href="https://pypi.org/project/tidydatacli/">
-    <img alt="PyPI version" src="https://img.shields.io/pypi/v/tidydatacli?style=for-the-badge&color=34d399&logo=pypi">
-  </a>
-  <a href="https://github.com/Siam3h/tidydatacli/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/Siam3h/tidydatacli?style=for-the-badge&color=f97316&logo=github">
-  </a>
-  <a href="https://github.com/Siam3h/tidydatacli/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/Siam3h/tidydatacli?style=for-the-badge&color=38bdf8&logo=open-source-initiative">
-  </a>
+<img alt="Total downloads" src="https://static.pepy.tech/badge/tidydatacli" style="height: 20px; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); object-fit: contain;">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/Siam3h/tidydatacli?color=ffd700&#x26;logo=github" style="height: 20px; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); object-fit: contain;">
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/Siam3h/tidydatacli?color=8b5cf6&#x26;logo=github" style="height: 20px; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); object-fit: contain;">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/tidydatacli?color=34d399&#x26;logo=pypi" style="height: 20px; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); object-fit: contain;">
+<img alt="GitHub issues" src="https://img.shields.io/github/issues/Siam3h/tidydatacli?color=f97316&#x26;logo=github" style="height: 20px; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); object-fit: contain;">
 </p>
 
 
