@@ -32,7 +32,7 @@ jobs:
           branch="auto/readme-update-$(date +%s)"
           git checkout -b $branch
           git add README.md
-          git commit -m "🤖 Auto-update README from docs" || echo "No changes to commit"
+          git commit -m "🤖 Auto-update README from docs" || echo "No changes detected"
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} $branch
 
       - name: 🔀 Create Pull Request
