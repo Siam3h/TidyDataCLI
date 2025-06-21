@@ -5,31 +5,26 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
-from src.utils.file_utils import read_file
-from src.utils.exceptions import FileNotFoundError, UnsupportedFileFormatError
+
 
 def create_combined_summary_report(data_frame: pd.DataFrame) -> dict:
-    """
-    Creates a comprehensive summary report from the DataFrame.
-
-    Args:
-        data_frame (pd.DataFrame): Data to be included in the report.
-
-    Returns:
-        dict: Report content organized by sections.
-    """
     report_sections = {}
 
+    # Descriptive statistics
     desc_stats = data_frame.describe(include='all').T.round(2)
-
     desc_stats['Data Type'] = data_frame.dtypes
     desc_stats['Unique Values'] = data_frame.nunique()
-
     report_sections['Descriptive Statistics'] = desc_stats.reset_index().values.tolist()
 
-    correlation_matrix = data_frame.corr().round(2)
-    report_sections['Correlation Matrix'] = correlation_matrix.reset_index().values.tolist()
+    # Correlation matrix - Only apply to numeric columns
+    numeric_cols = data_frame.select_dtypes(include=[float, int])
+    if not numeric_cols.empty:
+        correlation_matrix = numeric_cols.corr().round(2)
+        report_sections['Correlation Matrix'] = correlation_matrix.reset_index().values.tolist()
+    else:
+        report_sections['Correlation Matrix'] = [["No numeric columns available for correlation."]]
 
+    # Missing values
     missing_values = data_frame.isnull().sum()
     total_cells = data_frame.size
     total_missing = missing_values.sum()
@@ -42,6 +37,7 @@ def create_combined_summary_report(data_frame: pd.DataFrame) -> dict:
 
     report_sections['Missing Values Summary'] = missing_summary if len(missing_summary) > 1 else [["No missing values"]]
 
+    # Value counts for categorical columns
     categorical_cols = data_frame.select_dtypes(include=['object', 'category']).columns
     value_counts_summary = []
     for column in categorical_cols:
@@ -51,6 +47,7 @@ def create_combined_summary_report(data_frame: pd.DataFrame) -> dict:
 
     report_sections['Value Counts Summary'] = value_counts_summary if value_counts_summary else [["No categorical columns"]]
 
+    # Outliers summary
     outliers_summary = [['Column', 'Outliers Count', 'Outliers Percentage']]
     for column in data_frame.select_dtypes(include=[float, int]).columns:
         q1 = data_frame[column].quantile(0.25)
@@ -85,7 +82,7 @@ def generate_pdf_report(report_sections: dict, pdf_file: str, data_frame: pd.Dat
         content.append(Spacer(1, 12))
 
         for section_title, section_content in report_sections.items():
-            section_style = ParagraphStyle('Heading2', alignment=TA_CENTER, fontSize=12, spaceAfter=12, fontName='Helvetica-Bold')
+            section_style = ParagraphStyle('Heading2', alignment=TA_CENTER, fontSize=9, spaceAfter=9, fontName='Helvetica-Bold')
             content.append(Paragraph(section_title, section_style))
             content.append(Spacer(1, 12))
 
@@ -121,3 +118,22 @@ def generate_pdf_report(report_sections: dict, pdf_file: str, data_frame: pd.Dat
         doc.build(content)
     except Exception as e:
         raise RuntimeError(f"Failed to generate PDF report: {e}")
+
+
+def generate_txt_report(report_sections: dict, txt_file: str):
+    """
+    Generates a TXT report from the given report sections.
+
+    Args:
+        report_sections (dict): The content to be included in the TXT report.
+        txt_file (str): The path where the TXT report will be saved.
+    """
+    try:
+        with open(txt_file, 'w') as file:
+            for section, content in report_sections.items():
+                file.write(f"Section: {section}\n")
+                for row in content:
+                    file.write(" | ".join(map(str, row)) + "\n")
+                file.write("\n")
+    except Exception as e:
+        raise RuntimeError(f"Failed to generate TXT report: {e}")

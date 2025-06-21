@@ -1,135 +1,127 @@
-import argparse
+import click
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-from rich.console import Console
-from rich.progress import track
-from rich.traceback import install
-from src.visualiser.visualiser import DataVisualizer
-from src.file_handler.fileHandler import get_handler, determine_file_format
-from src.utils.exceptions import ColumnNotFoundError, DataMismatchError, InvalidChartTypeError
+from .visualiser import DataVisualizer
 
-console = Console()
-install()
+@click.group(
+    help="""
+    **Data Visualization Commands**
 
-class VisualiserCommand:
-    @staticmethod
-    def add_visualising_subparser(subparsers):
-        parser = subparsers.add_parser('visualize', help="Visualize data", description="Generate various types of charts from data.")
-        parser.add_argument('input', type=str, help="Input file path (CSV, Excel, or JSON)")
-        parser.add_argument('--chart_type', type=str, required=True, help="Type of visualization chart to generate",
-                            choices=['bar', 'horizontal', 'pie', 'wordcloud', 'table', 'line',
-                                     'box', 'gantt', 'heatmap', 'histogram', 'treemap', 'correlation', 'scatter'])
-        parser.add_argument('--x', type=str, help="X-axis data for bar/line/box plots or column for histogram")
-        parser.add_argument('--y', type=str, help="Y-axis data for bar/line/box plots")
-        parser.add_argument('--percentage', action='store_true', help="Plot values as percentages")
-        parser.add_argument('--labels', type=str, help="Labels for pie chart")
-        parser.add_argument('--values', type=str, help="Values for pie chart or treemap")
-        parser.add_argument('--text_column', type=str, help="Text column for word cloud")
-        parser.add_argument('--task_column', type=str, help="Task column for Gantt chart")
-        parser.add_argument('--start_column', type=str, help="Start date column for Gantt chart")
-        parser.add_argument('--end_column', type=str, help="End date column for Gantt chart")
-        parser.add_argument('--path', nargs='+', help="Path for treemap")
-        parser.add_argument('--column', type=str, help="Column for histogram")
-        parser.add_argument('--bins', type=int, default=10, help="Number of bins for histogram")
-        parser.add_argument('--output_path', type=str, help="Path to save the output chart image", default=None)
-        parser.add_argument('--title', default="Chart", help="Title of the chart")
-        parser.add_argument('--x_label', help="Label for the x-axis")
-        parser.add_argument('--y_label', help="Label for the y-axis")
-        parser.set_defaults(func=VisualiserCommand.visualiser_command)
+    This group provides commands for creating various types of visualizations from a dataset.
 
-    @staticmethod
-    def visualiser_command(args):
-        file_format = determine_file_format(args.input)
-        handler = get_handler(file_format, args.input)
+    ### Available Visualizations:
 
-        try:
-            console.print(f"[green]Loading data from {args.input}...[/green]")
-            data = handler.load_data()
-        except Exception as e:
-            console.print(f"[bold red]Error reading input file: {e}[/bold red]")
-            return
+    - **basic-bar-chart**: Create a standard bar chart.\n
+    - **horizontal-bar-chart**: Create a horizontal bar chart.\n
+    - **line-chart**: Generate a line chart for time series data.\n
+    - **wordcloud**: Generate a word cloud from a text column.\n
+    - **scatter-plot**: Create a scatter plot to visualize relationships between variables.\n
 
-        data_visualiser = DataVisualizer(data)
+    ### Examples:
 
-        try:
-            for _ in track(range(1), description="Generating visualization..."):
-                if args.chart_type == 'bar':
-                    if not args.x or not args.y:
-                        raise ColumnNotFoundError("Both --x and --y arguments are required for a bar chart")
-                    data_visualiser.basic_bar_chart(x_column=args.x, y_column=args.y, percentage=args.percentage,
-                                                    title=args.title, x_label=args.x_label, y_label=args.y_label,
-                                                    output_path=args.output_path)
+    1. **Generate a Basic Bar Chart**:
+    \b
+    python cmd.py visualize basic-bar-chart input.csv --x_column 'Category' --output 'bar_chart.png'
 
-                elif args.chart_type == 'horizontal':
-                    if not args.x or not args.y:
-                        raise ColumnNotFoundError("Both --x and --y arguments are required for a horizontal bar chart")
-                    data_visualiser.horizontal_bar_chart(x_column=args.x, y_column=args.y, percentage=args.percentage,
-                                                         title=args.title, x_label=args.x_label, y_label=args.y_label,
-                                                         output_path=args.output_path)
+    2. **Generate a Word Cloud**:
+    \b
+    python cmd.py visualize wordcloud input.csv --text_column 'Text' --output 'wordcloud.png'
+    """
+)
+def cli():
+    """A command-line interface for data visualization using DataVisualizer."""
+    pass
 
-                elif args.chart_type == 'pie':
-                    if not args.labels or not args.values:
-                        raise DataMismatchError("Pie chart requires both --labels and --values arguments")
-                    data_visualiser.pie_chart(labels=args.labels, values=args.values, title=args.title,
-                                              output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--x_column', help='The column for the x-axis.')
+@click.option('--y_column', default=None, help='The column for the y-axis (optional).')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the chart image (optional).')
+@click.option('--title', default='Basic Bar Chart', help='Title of the bar chart.')
+@click.option('--percentage', is_flag=True, default=False, help='Display percentages instead of counts.')
+def basic_bar_chart(input_file, x_column, y_column, output, title, percentage):
+    """Generate a basic bar chart."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.basic_bar_chart(x_column=x_column, y_column=y_column, percentage=percentage, title=title, output_path=output)
 
-                elif args.chart_type == 'wordcloud':
-                    if not args.text_column:
-                        raise ColumnNotFoundError("Word cloud requires --text_column argument")
-                    data_visualiser.wordcloud(text_column=args.text_column, title=args.title, output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--x_column', help='The column for the x-axis.')
+@click.option('--y_column', default=None, help='The column for the y-axis (optional).')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the chart image (optional).')
+@click.option('--title', default='Horizontal Bar Chart', help='Title of the horizontal bar chart.')
+@click.option('--percentage', is_flag=True, default=False, help='Display percentages instead of counts.')
+def horizontal_bar_chart(input_file, x_column, y_column, output, title, percentage):
+    """Generate a horizontal bar chart."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.horizontal_bar_chart(x_column=x_column, y_column=y_column, percentage=percentage, title=title, output_path=output)
 
-                elif args.chart_type == 'table':
-                    data_visualiser.table(output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--text_column', help='The column containing text data.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the word cloud image (optional).')
+@click.option('--title', default='Word Cloud', help='Title of the word cloud.')
+def wordcloud(input_file, text_column, output, title):
+    """Generate a word cloud from text data."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.wordcloud(text_column=text_column, title=title, output_path=output)
 
-                elif args.chart_type == 'line':
-                    if not args.x or not args.y:
-                        raise ColumnNotFoundError("Line chart requires both --x and --y arguments")
-                    data_visualiser.line_chart(x=args.x, y=args.y, title=args.title, output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--output', default=None, type=click.Path(), help='Path to save the table (optional).')
+@click.option('--format', default='html', help='Output format for the table (html, png, etc.).')
+def table(input_file, output, format):
+    """Generate a table from the dataset."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.table(output_path=output, output_format=format)
 
-                elif args.chart_type == 'box':
-                    if not args.x or not args.y:
-                        raise ColumnNotFoundError("Box-and-whisker plot requires both --x and --y arguments")
-                    data_visualiser.box_and_whisker_plot(x=args.x, y=args.y, title=args.title, output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--x_column', help='The column for the x-axis.')
+@click.option('--y_column', help='The column for the y-axis.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the line chart (optional).')
+@click.option('--title', default='Line Chart', help='Title of the line chart.')
+def line_chart(input_file, x_column, y_column, output, title):
+    """Generate a line chart from the dataset."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.line_chart(x_column=x_column, y_column=y_column, title=title, output_path=output)
 
-                elif args.chart_type == 'gantt':
-                    if not args.task_column or not args.start_column or not args.end_column:
-                        raise ColumnNotFoundError("Gantt chart requires --task_column, --start_column, and --end_column arguments")
-                    data_visualiser.gantt_chart(task_column=args.task_column, start_column=args.start_column,
-                                                end_column=args.end_column, title=args.title, output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--column', help='The column for which the histogram is generated.')
+@click.option('--bins', default=10, type=int, help='Number of bins in the histogram.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the histogram image (optional).')
+@click.option('--title', default='Histogram', help='Title of the histogram.')
+def histogram(input_file, column, bins, output, title):
+    """Generate a histogram for a specific column."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.histogram(column=column, bins=bins, title=title, output_path=output)
 
-                elif args.chart_type == 'heatmap':
-                    data_visualiser.heat_map(title=args.title, output_path=args.output_path)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--x_column', help='The column for x-axis values.')
+@click.option('--y_column', help='The column for y-axis values.')
+@click.option('--output', default=None, type=click.Path(), help='Path to save the scatter plot image (optional).')
+@click.option('--title', default='Scatter Plot', help='Title of the scatter plot.')
+def scatter_plot(input_file, x_column, y_column, output, title):
+    """Generate a scatter plot to visualize the relationship between two variables."""
+    data = pd.read_csv(input_file)
+    visualizer = DataVisualizer(data)
+    visualizer.scatter_plot(x_column=x_column, y_column=y_column, title=title, output_path=output)
 
-                elif args.chart_type == 'histogram':
-                    if not args.column:
-                        raise ColumnNotFoundError("Histogram requires --column argument")
-                    data_visualiser.histogram(column=args.column, bins=args.bins, title=args.title, output_path=args.output_path)
+# Adding commands to the main CLI group
+cli.add_command(basic_bar_chart)
+cli.add_command(horizontal_bar_chart)
+cli.add_command(wordcloud)
+cli.add_command(table)
+cli.add_command(line_chart)
+cli.add_command(histogram)
+cli.add_command(scatter_plot)
 
-                elif args.chart_type == 'treemap':
-                    if not args.path or not args.values:
-                        raise DataMismatchError("Treemap requires both --path and --values arguments")
-                    data_visualiser.treemap(path=args.path, values=args.values, title=args.title, output_path=args.output_path)
-
-                elif args.chart_type == 'correlation':
-                    data_visualiser.correlation_matrix(title=args.title, output_path=args.output_path)
-
-                elif args.chart_type == 'scatter':
-                    if not args.x or not args.y:
-                        raise ColumnNotFoundError("Scatter plot requires both --x and --y arguments")
-                    data_visualiser.scatter_plot(x_column=args.x, y_column=args.y, title=args.title, x_label=args.x_label,
-                                                 y_label=args.y_label, output_path=args.output_path)
-
-                else:
-                    raise InvalidChartTypeError(f"Unknown visualization type: {args.chart_type}")
-
-            if args.output_path:
-                console.print(f"[bold green]Visualization saved to {args.output_path}[/bold green]")
-            else:
-                console.print("[yellow]Visualization displayed but not saved (no output path provided).[/yellow]")
-
-        except (ColumnNotFoundError, DataMismatchError, InvalidChartTypeError) as e:
-            console.print(f"[bold red]Error generating visualization: {e}[/bold red]")
-        except Exception as e:
-            console.print(f"[bold red]Unexpected error occurred: {e}[/bold red]")
+if __name__ == '__main__':
+    cli()

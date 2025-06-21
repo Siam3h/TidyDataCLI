@@ -1,3 +1,4 @@
+from io import BytesIO
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -35,7 +36,6 @@ class DataVisualizer:
         """
         try:
             plt.figure(figsize=(10, 6))
-
             if x_column not in self.data.columns:
                 raise ColumnNotFoundError(f"Column '{x_column}' not found in the data.")
             if y_column is not None and y_column not in self.data.columns:
@@ -75,10 +75,9 @@ class DataVisualizer:
         - x_label (str, optional): Label for the x-axis (default is 'Count').
         - y_label (str, optional): Label for the y-axis.
         - output_path (str, optional): Path to save the chart image (if None, will display).
-        """
+            """
         try:
             plt.figure(figsize=(10, 6))
-
             if x_column not in self.data.columns:
                 raise ColumnNotFoundError(f"Column '{x_column}' not found in the data.")
             if y_column is not None and y_column not in self.data.columns:
@@ -101,38 +100,6 @@ class DataVisualizer:
                 plt.show()
 
         except ColumnNotFoundError as e:
-            render_error_message(e)
-        except Exception as e:
-            render_error_message(e)
-
-    def pie_chart(self, labels, values, title="Pie Chart", output_path=None):
-        """
-        Generate a pie chart.
-
-        Parameters:
-        - labels (str): The column for pie chart labels.
-        - values (str): The column for pie chart values.
-        - title (str, optional): Title of the pie chart.
-        - output_path (str, optional): Path to save the pie chart image (if None, will display).
-        """
-        try:
-            if labels not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{labels}' not found in the data.")
-            if values not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{values}' not found in the data.")
-
-            data_for_pie = self.data[[labels, values]].dropna()
-
-            if len(data_for_pie[labels]) != len(data_for_pie[values]):
-                raise DataMismatchError(f"Mismatch in lengths of 'labels' and 'values' columns.")
-
-            fig = px.pie(data_for_pie, names=labels, values=values, title=title)
-            if output_path:
-                fig.write_image(output_path)
-            else:
-                fig.show()
-
-        except (ColumnNotFoundError, DataMismatchError) as e:
             render_error_message(e)
         except Exception as e:
             render_error_message(e)
@@ -172,22 +139,23 @@ class DataVisualizer:
         Generate a simple table visualization of the dataset.
 
         Parameters:
-        - output_path (str, optional): Path to save the table as an HTML file (if None, will display).
+        - output_path (str or BytesIO, optional): Path to save the table as an HTML file (if None, will display).
+        - output_format (str, optional): The format to save the table ('html', 'png', 'jpeg', etc.).
         """
-
         try:
             fig = go.Figure(data=[go.Table(
-                header=dict(values=list(self.data.columns),
-                            fill_color='paleturquoise',
-                            align='left'),
-                cells=dict(values=[self.data[col] for col in self.data.columns],
-                           fill_color='lavender',
-                           align='left'))
+                header=dict(values=list(self.data.columns), fill_color='paleturquoise', align='left'),
+                cells=dict(values=[self.data[col] for col in self.data.columns], fill_color='lavender', align='left'))
             ])
-
             if output_path:
                 if output_format == 'html':
-                    fig.write_html(output_path)
+                    
+                    if isinstance(output_path, BytesIO):
+                       
+                        html_str = fig.to_html(full_html=False)
+                        output_path.write(html_str.encode('utf-8'))
+                    else:
+                        fig.write_html(output_path)
                 elif output_format in ['png', 'jpeg', 'jpg', 'webp', 'svg', 'pdf', 'eps']:
                     fig.write_image(output_path, format=output_format)
                 else:
@@ -200,8 +168,9 @@ class DataVisualizer:
         except Exception as e:
             render_error_message(e)
 
+
     def line_chart(self, x_column, y_column, title="Line Chart", x_label=None, y_label=None, output_path=None):
-	    """
+        """
 	    Generate a line chart. Supports optional percentage values and grouped mean values.
 
 	    Parameters:
@@ -235,114 +204,35 @@ class DataVisualizer:
         except Exception as e:
             render_error_message(e)
 
-    def box_and_whisker_plot(self, x_column, y_column, title="Box and Whisker Plot", output_path=None):
+    def histogram(self, column, bins=10, title="Histogram", x_label=None, y_label='Frequency', output_path=None):
         """
-        Generate a box-and-whisker plot.
+        Generate a histogram for a specific column.
 
         Parameters:
-        - x (str): The column for the x-axis.
-        - y (str): The column for the y-axis.
-        - title (str, optional): Title of the box-and-whisker plot.
-        - output_path (str, optional): Path to save the chart image (if None, will display).
-        """
-        try:
-            if x_column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{x_column}' not found in the data.")
-            if y_column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{y_column}' not found in the data.")
-
-            plt.figure(figsize=(10, 6))
-            sns.boxplot(x=self.data[x_column], y=self.data[y_column])
-            plt.title(title)
-            if output_path:
-                plt.savefig(output_path)
-                plt.close()
-            else:
-                plt.show()
-
-        except ColumnNotFoundError as e:
-            render_error_message(e)
-        except Exception as e:
-            render_error_message(e)
-
-    def heatmap(self, title="Heatmap", output_path=None):
-        """
-        Generate a heat map of correlations between numeric columns.
-
-        Parameters:
-        - title (str, optional): Title of the heat map.
-        - output_path (str, optional): Path to save the heat map image (if None, will display).
-        """
-        try:
-            plt.figure(figsize=(10, 6))
-            sns.heatmap(self.data.corr(), annot=True, cmap="coolwarm")
-            plt.title(title)
-            if output_path:
-                plt.savefig(output_path)
-                plt.close()
-            else:
-                plt.show()
-
-        except Exception as e:
-            render_error_message(e)
-
-    def gantt_chart(self, task_column, start_column, end_column, title="Gantt Chart", output_path=None):
-        """
-        Generate a Gantt chart.
-
-        Parameters:
-        - task_column (str): The column for task names.
-        - start_column (str): The column for start dates.
-        - end_column (str): The column for end dates.
-        - title (str, optional): Title of the Gantt chart.
-        - output_path (str, optional): Path to save the chart image (if None, will display).
-        """
-        try:
-            if task_column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{task_column}' not found in the data.")
-            if start_column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{start_column}' not found in the data.")
-            if end_column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{end_column}' not found in the data.")
-
-            fig = ff.create_gantt(self.data, index_col=task_column, show_colorbar=True,
-                                  title=title, start=start_column, end=end_column)
-            if output_path:
-                fig.write_image(output_path)
-            else:
-                fig.show()
-
-        except ColumnNotFoundError as e:
-            render_error_message(e)
-        except Exception as e:
-            render_error_message(e)
-
-    def correlation_matrix(self, title="Correlation Matrix", output_path=None):
-        """
-        Generate a correlation matrix heatmap for numerical columns.
-
-        Parameters:
-        - title (str, optional): Title of the correlation matrix heatmap (default is "Correlation Matrix").
-        - output_path (str, optional): Path to save the heatmap image (if None, will display).
+        - column (str): The column for which the histogram is generated.
+        - bins (int, optional): Number of bins in the histogram (default is 10).
+        - title (str, optional): Title of the histogram (default is "Histogram").
+        - output_path (str, optional): Path to save the histogram image (if None, will display).
 
         Raises:
-        - DataMismatchError: If there are no numeric columns to calculate correlations.
+        - ColumnNotFoundError: If the specified column is not found in the data.
         """
         try:
-            corr_matrix = self.data.corr()
-            if corr_matrix.empty:
-                raise DataMismatchError("No numeric columns available for correlation matrix.")
+            if column not in self.data.columns:
+                raise ColumnNotFoundError(f"Column '{column}' not found in the data.")
 
             plt.figure(figsize=(10, 6))
-            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
+            sns.histplot(self.data[column], bins=bins)
             plt.title(title)
+            plt.xlabel(x_label if x_label else column)
+            plt.ylabel(y_label)
             if output_path:
                 plt.savefig(output_path)
                 plt.close()
             else:
                 plt.show()
 
-        except DataMismatchError as e:
+        except ColumnNotFoundError as e:
             render_error_message(e)
         except Exception as e:
             render_error_message(e)
@@ -384,61 +274,3 @@ class DataVisualizer:
         except Exception as e:
             render_error_message(e)
 
-    def histogram(self, column, bins=10, title="Histogram", output_path=None):
-        """
-        Generate a histogram for a specific column.
-
-        Parameters:
-        - column (str): The column for which the histogram is generated.
-        - bins (int, optional): Number of bins in the histogram (default is 10).
-        - title (str, optional): Title of the histogram (default is "Histogram").
-        - output_path (str, optional): Path to save the histogram image (if None, will display).
-
-        Raises:
-        - ColumnNotFoundError: If the specified column is not found in the data.
-        """
-        try:
-            if column not in self.data.columns:
-                raise ColumnNotFoundError(f"Column '{column}' not found in the data.")
-
-            plt.figure(figsize=(10, 6))
-            plt.hist(self.data[column], bins=bins, edgecolor='black')
-            plt.title(title)
-            if output_path:
-                plt.savefig(output_path)
-                plt.close()
-            else:
-                plt.show()
-
-        except ColumnNotFoundError as e:
-            render_error_message(e)
-        except Exception as e:
-            render_error_message(e)
-
-    def treemap(self, path, values, title="Treemap", output_path=None):
-        """
-        Generate a treemap.
-
-        Parameters:
-        - path (list of str): List of columns for hierarchical categories in the treemap.
-        - values (str): The column for the treemap values.
-        - title (str, optional): Title of the treemap (default is "Treemap").
-        - output_path (str, optional): Path to save the treemap image (if None, will display).
-
-        Raises:
-        - ColumnNotFoundError: If any of the columns in `path` or `values` are not found in the data.
-        """
-        try:
-            if any(col not in self.data.columns for col in path + [values]):
-                raise ColumnNotFoundError(f"One or more columns in {path} or '{values}' not found in the data.")
-
-            fig = px.treemap(self.data, path=path, values=values, title=title)
-            if output_path:
-                fig.write_image(output_path)
-            else:
-                fig.show()
-
-        except ColumnNotFoundError as e:
-            render_error_message(e)
-        except Exception as e:
-            render_error_message(e)

@@ -1,71 +1,96 @@
-import argparse
-import os
+import click
 import pandas as pd
-from src.reporter.reporter import generate_pdf_report, create_combined_summary_report
-from src.file_handler.fileHandler import get_handler, determine_file_format
-from src.utils.exceptions import FileNotFoundError, UnsupportedFileFormatError
-from rich.console import Console
-from rich.progress import track
-from rich.traceback import install
+from .reporter import create_combined_summary_report, generate_pdf_report, generate_txt_report
 
-console = Console()
-install()
+@click.group(
+    help="""
+    **Report Generation Commands**
 
-def reporting_command(subparsers):
+    This group provides commands for generating detailed summary reports from a dataset in various formats.
+
+    ### Available Reports:
+
+    - **PDF Report**: A comprehensive PDF report with sections like Descriptive Statistics, Correlation Matrices, Missing Values, and Outlier Analysis.
+    - **TXT Report**: A simple text-based summary report with similar sections as the PDF.
+
+    ### Examples:
+
+    1. **Create a Summary Report in PDF**:
+    \b
+    python cmd.py report generate-pdf data.csv --output_pdf summary_report.pdf
+
+    2. **Create a TXT Report**:
+    \b
+    python cmd.py report generate-txt data.csv --output_txt summary_report.txt
     """
-    Adds a subcommand for generating a report to the argument parser.
+)
+def cli():
+    """A command-line interface for generating summary reports and PDF/TXT files."""
+    pass
+
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--output_summary', default=None, type=click.Path(), help='Path to save the summary CSV file (optional).')
+def create_summary(input_file, output_summary):
+    """
+    Create a combined summary report and display the results.
 
     Args:
-        subparsers (argparse._SubParsersAction): The subparsers object from argparse.
-
-    This function sets up the 'report' subcommand for generating a report.
-    It adds arguments for the input file path, output file path, and output format.
+        input_file (str): The input CSV file path.
+        output_summary (str, optional): The output path for saving the summary CSV.
     """
-    parser = subparsers.add_parser('report', help="Generate a report")
-    parser.add_argument('input', type=str, help="Path to the input file (CSV or Excel).")
-    parser.add_argument('output', type=str, help="Path to the output file where the report will be saved.")
-    parser.add_argument('--format', type=str, choices=['txt', 'pdf'], default='txt',
-                        help="Format of the output report ('txt' or 'pdf'). Defaults to 'txt'.")
+    data = pd.read_csv(input_file)
+    report_sections = create_combined_summary_report(data)
 
-    parser.set_defaults(func=report_command)
+    # Display the generated summary
+    for section, content in report_sections.items():
+        print(f"Section: {section}")
+        for row in content:
+            print(" | ".join(map(str, row)))
+        print("\n")
 
-def report_command(args):
+    # Save summary as CSV if specified
+    if output_summary:
+        summary_df = pd.DataFrame({section: pd.Series(content) for section, content in report_sections.items()})
+        summary_df.to_csv(output_summary, index=False)
+        print(f"Summary saved to {output_summary}")
+
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--output_pdf', default='report.pdf', type=click.Path(), help='Path to save the PDF report.')
+def generate_pdf(input_file, output_pdf):
     """
-    Handles the 'report' command to generate and save a report.
+    Generate a PDF report from the input CSV file.
 
     Args:
-        args (argparse.Namespace): The parsed command-line arguments.
-
-    This function calls `generate_report` to create a report based on the input file and format.
-    It then writes the report content to the specified output file.
-    In case of errors, it provides appropriate messages to the user.
-
-    Raises:
-        FileNotFoundError: If the input file does not exist.
-        UnsupportedFileFormatError: If the file format is unsupported.
-        IOError: If there's an issue with file operations.
-        Exception: For any other unexpected errors.
+        input_file (str): The input CSV file path.
+        output_pdf (str): The output path for saving the PDF report.
     """
-    try:
-        file_format = determine_file_format(args.input)
-        handler = get_handler(file_format, args.input)
-        data_frame = handler.load_data()
+    data = pd.read_csv(input_file)
+    report_sections = create_combined_summary_report(data)
+    generate_pdf_report(report_sections, pdf_file=output_pdf, data_frame=data)
+    print(f"PDF report generated and saved to {output_pdf}")
 
-        report_sections = create_combined_summary_report(data_frame)
+@click.command()
+@click.argument('input_file', type=click.Path(exists=True))
+@click.option('--output_txt', default='report.txt', type=click.Path(), help='Path to save the TXT report.')
+def generate_txt(input_file, output_txt):
+    """
+    Generate a TXT report from the input CSV file.
 
-        if args.format == 'pdf':
-            generate_pdf_report(report_sections, args.output, data_frame)
-            console.print(f"[bold green]PDF report successfully saved to {args.output}[/bold green]")
-        elif args.format == 'txt':
-            raise NotImplementedError("Text report generation is not implemented.")
+    Args:
+        input_file (str): The input CSV file path.
+        output_txt (str): The output path for saving the TXT report.
+    """
+    data = pd.read_csv(input_file)
+    report_sections = create_combined_summary_report(data)
+    generate_txt_report(report_sections, txt_file=output_txt)
+    print(f"TXT report generated and saved to {output_txt}")
 
-    except FileNotFoundError as e:
-        console.print(f"[bold red]Error: Input file not found - {e.file_path}[/bold red]")
-    except UnsupportedFileFormatError as e:
-        console.print(f"[bold red]Error: {e.message}[/bold red]")
-    except IOError as e:
-        console.print(f"[bold red]Error: File operation failed - {e}[/bold red]")
-    except NotImplementedError as e:
-        console.print(f"[bold red]Error: {e}[/bold red]")
-    except Exception as e:
-        console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]")
+# Adding commands to the main CLI group
+cli.add_command(create_summary)
+cli.add_command(generate_pdf)
+cli.add_command(generate_txt)
+
+if __name__ == '__main__':
+    cli()

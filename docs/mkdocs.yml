@@ -1,0 +1,10 @@
+site_name: TidyDataCLI
+theme: readthedocs
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Tutorials: tutorials.md
+  - Best Practices: bestpractices.md
+  - Troubleshooting: troubleshooting.md
+  - Contributing: contributing.md

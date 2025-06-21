@@ -2,14 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
  name="TidyDataCLI",
- version="0.3.0",
+ version="1.0.0",
  packages=find_packages(),
  install_requires=[
         "pandas==2.2.2",
         "matplotlib==3.9.2",
         "openpyxl==3.1.5",
         "numpy==2.0.1",
-        "rich==13.7.1",
         "seaborn==0.13.2",
         "requests==2.32.3",
         "python-dateutil==2.9.0.post0",

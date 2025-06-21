@@ -1,0 +1,37 @@
+name: Generate README
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: 🛠️ Run ./docs/generate_readme.py
+        run: python docs/generate_readme.py
+
+      - name: ⚙️ Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 🪄 Create branch, commit and push
+        run: |
+          branch="auto/readme-update-$(date +%s)"
+          git checkout -b $branch
+          git add README.md
+          git commit -m "🤖 Auto-update README from docs" || echo "No changes detected"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} $branch
+
