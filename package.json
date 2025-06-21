@@ -1,0 +1,27 @@
+{
+  "name": "tidydatacli",
+  "version": "1.0.0",
+  "description": "![TidyDataCLI Logo](https://github.com/Siam3h/TidyDataCLI/blob/main/TidyDataCLI.jpg)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "mkdocs build -f docs/mkdocs.yml",
+    "dev": "mkdocs serve -f docs/mkdocs.yml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siam3h/TidyDataCLI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Siam3h/TidyDataCLI/issues"
+  },
+  "homepage": "https://github.com/Siam3h/TidyDataCLI#readme"
+}
