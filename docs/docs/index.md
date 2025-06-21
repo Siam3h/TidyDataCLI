@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <a href="https://github.com/Siam3h/tidydatacli/stargazers">
     <img alt="GitHub stars" src="https://img.shields.io/github/stars/Siam3h/tidydatacli?style=flat-square&color=FFD700">
   </a>
