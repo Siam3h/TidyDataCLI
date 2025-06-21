@@ -9,6 +9,6 @@ __pycache__/
 dist/
 build/
 *.egg
-*.vscode
+*.vscode/
 .git
-.vs
+.vs/
